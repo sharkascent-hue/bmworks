@@ -30,6 +30,16 @@
     });
     window.addEventListener('pageshow', function (e) { if (e.persisted) rootEl.classList.remove('leaving'); });
   }
+  // Quantum Tuning look-up: their server only allows it when embedded on bmworks.it
+  $$('[data-lookup]').forEach(function (box) {
+    var h = location.hostname.replace(/^www\./, '');
+    if (box.dataset.hosts.split(',').indexOf(h) < 0) return;
+    var f = document.createElement('iframe');
+    f.src = box.dataset.lookup; f.loading = 'lazy';
+    f.setAttribute('title', 'Quantum Tuning vehicle look-up');
+    box.innerHTML = ''; box.appendChild(f); box.classList.add('on');
+  });
+
   // scroll progress bar
   var bar = $('.progress');
   if (bar) {

@@ -10,7 +10,7 @@ const OUT = path.resolve(SRC, '..');
 // While the site is a preview it must not be indexed. Set to false (and check SITE_URL) at go-live.
 const PREVIEW = true;
 const SITE_URL = 'https://www.bmworks.it/';
-const V = '5';
+const V = '6';
 
 const faq = JSON.parse(fs.readFileSync(path.join(SRC, 'content/faq.json'), 'utf8')).items;
 const imgmap = JSON.parse(fs.readFileSync(path.join(SRC, 'content/imgmap.json'), 'utf8'));
@@ -356,14 +356,18 @@ function remap() {
   const P = REMAP;
   return page({ key: 'remap', title: t(P.title), desc: t(P.desc), ogImg: 'blog-a97a96fd.webp', body: `
 ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-affc3b0d.webp', trail: [[null, t(UI.nav.remapLookup)]] })}
-<section class="sec"><div class="wrap split">
+<section class="sec"><div class="wrap">${secHead(t(P.toolKicker), t(P.toolTitle), t(P.toolText))}
+  <div class="lookup" data-lookup="${BIZ.lookup}" data-hosts="bmworks.it"><div class="lookup-off">${I.pin.replace('aria-hidden', 'data-x aria-hidden')}<p>${t(P.toolOff)}</p><a class="btn btn-gold btn-sm" href="#preventivo">${t(UI.sideTitle)} ${I.arrow}</a></div></div>
+  <p class="note">${t(P.toolNote)}</p>
+</div></section>
+<section class="sec sec-alt"><div class="wrap split">
   <div>${secHead(t(P.lookKicker), t(P.lookTitle), t(P.lookText))}
     <ol class="steps">${t(P.steps).map(([h, x], i) => `<li><span class="num">${i + 1}</span><div><h3>${h}</h3><p>${x}</p></div></li>`).join('')}</ol></div>
   <div class="panel" id="preventivo">${remapForm()}</div>
 </div></section>
-<section class="sec sec-alt"><div class="wrap">${secHead(t(HOME.remapKicker), t(HOME.remapTitle), t(HOME.remapText))}
+<section class="sec"><div class="wrap">${secHead(t(HOME.remapKicker), t(HOME.remapTitle), t(HOME.remapText))}
   <div class="tiles">${HOME.remapTypes.map(r => `<div class="tile"><span class="tile-ic">${VEH[r.icon]}</span><h3>${t(r.title)}</h3><p>${t(r.text)}</p></div>`).join('')}</div></div></section>
-<section class="sec"><div class="wrap split">
+<section class="sec sec-alt"><div class="wrap split">
   <div>${prose(P.body)}<p class="btn-row"><a class="btn btn-gold" href="${href('options')}">${t(HOME.benCta)} ${I.arrow}</a><a class="btn btn-ghost" href="${href('faq')}">${t(UI.nav.remapFaq)}</a></p></div>
   <ul class="benefits">${HOME.benefits.map((b, i) => `<li><span class="num">${i + 1}</span><div><h3>${t(b.title)}</h3><p>${t(b.text)}</p></div></li>`).join('')}</ul>
 </div></section>${ctaBand()}` });
