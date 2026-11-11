@@ -73,7 +73,10 @@
   function setH() { document.documentElement.style.setProperty('--hh', header.getBoundingClientRect().bottom + 'px'); }
   // lock scrolling on <html>, not <body>: locking <body> turns it into a scroll box,
   // which un-sticks the header and carries the open menu off-screen
+  var menuY = 0;
   function setMenu(open) {
+    if (open) menuY = scrollY;
+    else if (nav.classList.contains('open') && Math.abs(scrollY - menuY) > 1) requestAnimationFrame(function () { scrollTo(0, menuY); });
     setH();
     nav.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);

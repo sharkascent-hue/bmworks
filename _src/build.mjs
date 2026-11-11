@@ -10,7 +10,7 @@ const OUT = path.resolve(SRC, '..');
 // While the site is a preview it must not be indexed. Set to false (and check SITE_URL) at go-live.
 const PREVIEW = true;
 const SITE_URL = 'https://www.bmworks.it/';
-const V = '8';
+const V = '10';
 
 const faq = JSON.parse(fs.readFileSync(path.join(SRC, 'content/faq.json'), 'utf8')).items;
 const imgmap = JSON.parse(fs.readFileSync(path.join(SRC, 'content/imgmap.json'), 'utf8'));
@@ -118,6 +118,24 @@ function nav() {
     <div class="dd"><button class="nav-link dd-btn" aria-expanded="false">${t(UI.nav.services)}${I.chev}</button>
       <div class="dd-panel dd-wide">${svc}<a class="dd-all" href="${href('services')}">${t(UI.nav.allServices)} ${I.arrow}</a></div></div>
     ${item('cars', UI.nav.cars)}${item('blog', UI.nav.blog)}${item('about', UI.nav.about)}${item('contact', UI.nav.contact)}
+    <div class="nav-extra">
+      <p class="nav-h">${t(UI.menuContact)}</p>
+      <div class="nav-btns">
+        <a class="btn btn-gold" href="tel:${BIZ.tel}">${I.phone}${t(UI.call)}</a>
+        <a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${I.wa}WhatsApp</a>
+        <a class="btn btn-ghost" href="${BIZ.mapsLink}" target="_blank" rel="noopener">${I.pin}${t(UI.menuDirections)}</a>
+      </div>
+      <ul class="contact-list">
+        <li>${I.pin}<a href="${BIZ.mapsLink}" target="_blank" rel="noopener">${BIZ.address}</a></li>
+        <li>${I.clock}<span>${t(UI.hours)}</span></li>
+        <li>${I.mail}<a href="mailto:${BIZ.email}">${BIZ.email}</a></li>
+      </ul>
+      ${gBadge('g-menu')}
+      <div class="nav-foot">
+        <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="${BIZ.tt}" target="_blank" rel="noopener" aria-label="TikTok">${I.tt}</a></div>
+        <span class="nav-small"><a href="${href('faq')}">FAQ</a> · <a href="${href('privacy')}">${t(UI.privacy)}</a></span>
+      </div>
+    </div>
   </nav>`;
 }
 function header() {

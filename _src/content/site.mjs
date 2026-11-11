@@ -25,6 +25,9 @@ export const UI = {
   introSkip: L('Salta l’animazione', 'Skip the animation'),
   introTag: L('Specialista indipendente BMW e MINI', 'Independent BMW & MINI specialist'),
   mainNav: L('Navigazione principale', 'Main navigation'),
+  menuContact: L('Contattaci', 'Get in touch'),
+  menuDirections: L('Indicazioni', 'Directions'),
+  menuFollow: L('Seguici', 'Follow us'),
   langLabel: L('Lingua', 'Language'),
   hours: L('Lun–Ven 9:00–18:00', 'Mon–Fri 9:00–18:00'),
   nav: {
