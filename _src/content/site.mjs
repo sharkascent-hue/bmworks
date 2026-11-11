@@ -69,7 +69,26 @@ export const UI = {
   },
 };
 
+export const VIDEOS = [
+  { id: 'mini', file: 'mini-multimedia', poster: 'vid-mini.webp', len: '1:56',
+    title: L('MINI: ripristino completo dopo il furto del sistema multimediale', 'MINI: full restoration after the multimedia system was stolen') },
+  { id: 'm2', file: 'm2-tagliando', poster: 'vid-m2.webp', len: '0:28',
+    title: L('BMW M2: mini tagliando registrato nel database BMW', 'BMW M2: interim service logged in the BMW database') },
+  { id: 'x6', file: 'x6-volante-carbonio', poster: 'vid-x6.webp', len: '0:56',
+    title: L('BMW X6 M50d: nuovo volante in carbonio con LED', 'BMW X6 M50d: new carbon steering wheel with LEDs') },
+  { id: 'm3', file: 'assetto-m3', poster: 'vid-m3.webp', len: '0:55',
+    title: L('Installazione assetto e ripristino di una BMW V8', 'Coilover installation and a BMW V8 brought back to life') },
+  { id: 'motore', file: 'motore-officina', poster: 'vid-motore.webp', len: '1:08',
+    title: L('In officina: motore BMW sul cavalletto', 'In the workshop: a BMW engine on the stand') },
+];
+
 export const HOME = {
+  heroBadge: L('Dalla nostra officina', 'From our workshop'),
+  vidKicker: L('Video', 'Videos'),
+  vidTitle: L('Guarda i nostri lavori', 'Watch our work'),
+  vidText: L('Interventi reali, ripresi nella nostra officina di San Giuliano Milanese.', 'Real jobs, filmed in our workshop in San Giuliano Milanese.'),
+  vidMore: L('Altri video su TikTok', 'More videos on TikTok'),
+  vidPlay: L('Riproduci il video', 'Play video'),
   title: L('BMWorks Performance — Specialista BMW e MINI a Milano | Rimappatura centraline', 'BMWorks Performance — BMW & MINI specialist in Milan | ECU remapping'),
   desc: L('Officina indipendente BMW e MINI a San Giuliano Milanese: rimappatura centraline, manutenzione, riparazioni, codifica e diagnosi.', 'Independent BMW and MINI workshop in San Giuliano Milanese: ECU remapping, servicing, repairs, coding and diagnostics.'),
   kicker: L('Specialista indipendente BMW e MINI', 'Independent BMW & MINI specialist'),
@@ -85,13 +104,13 @@ export const HOME = {
   remapTitle: L('Sblocca il potenziale del tuo veicolo', 'Unlock your vehicle’s potential'),
   remapText: L('Non solo BMW e MINI: rimappiamo auto, moto, camper e veicoli commerciali di tutti i marchi.', 'Not just BMW and MINI: we remap cars, motorbikes, motorhomes and commercial vehicles of every make.'),
   remapTypes: [
-    { img: 'remap-auto.webp', title: L('Rimappatura auto', 'Car remapping'), cta: L('Inizia la trasformazione', 'Start the transformation'),
+    { icon: 'car', title: L('Rimappatura auto', 'Car remapping'), cta: L('Inizia la trasformazione', 'Start the transformation'),
       text: L('Sblocca il vero potenziale della tua auto: migliore efficienza del carburante, potenza aumentata e prestazioni superiori.', 'Unlock your car’s true potential: better fuel efficiency, more power and superior performance.') },
-    { img: 'remap-moto.webp', title: L('Rimappatura moto', 'Motorbike remapping'), cta: L('Sblocca la potenza', 'Unlock the power'),
+    { icon: 'moto', title: L('Rimappatura moto', 'Motorbike remapping'), cta: L('Sblocca la potenza', 'Unlock the power'),
       text: L('Rivela la potenza nascosta della tua moto: maggiore efficienza, più potenza e prestazioni ottimali.', 'Reveal your bike’s hidden power: greater efficiency, more power and optimal performance.') },
-    { img: 'remap-camper.webp', title: L('Rimappatura camper', 'Motorhome remapping'), cta: L('Libera la potenza', 'Release the power'),
+    { icon: 'camper', title: L('Rimappatura camper', 'Motorhome remapping'), cta: L('Libera la potenza', 'Release the power'),
       text: L('Più potenza in salita e a pieno carico, consumi migliori: vivi l’avventura come mai prima d’ora.', 'More power uphill and fully loaded, with better fuel economy: enjoy the adventure like never before.') },
-    { img: 'remap-van.webp', title: L('Veicoli commerciali', 'Commercial vehicles'), cta: L('Rivela il vero potenziale', 'Reveal the true potential'),
+    { icon: 'van', title: L('Veicoli commerciali', 'Commercial vehicles'), cta: L('Rivela il vero potenziale', 'Reveal the true potential'),
       text: L('Massimizza l’efficienza del tuo veicolo commerciale: più potenza, prestazioni ottimizzate e risparmio di carburante.', 'Maximise your commercial vehicle’s efficiency: more power, optimised performance and fuel savings.') },
   ],
   benKicker: L('Dona una rinascita al tuo veicolo', 'Give your vehicle a new lease of life'),
@@ -143,7 +162,7 @@ One of the cornerstones of BMWorks Performance is preventive maintenance, which 
 
 export const SERVICES = [
   {
-    key: 'svc-service', slug: L('assistenza-bmw-e-mini', 'bmw-mini-servicing'), card: 'svc-service.webp',
+    key: 'svc-service', slug: L('assistenza-bmw-e-mini', 'bmw-mini-servicing'), card: 'real-m2.webp', videos: ['m2'],
     nav: L('Servizio e manutenzione BMW e MINI', 'BMW & MINI servicing and maintenance'),
     short: L('Tagliandi registrati nel database BMW, con ricambi originali e sistema CBS.', 'Services logged in the BMW database, with genuine parts and the CBS system.'),
     title: L('Assistenza e manutenzione BMW e MINI a Milano | BMWorks Performance', 'BMW and MINI servicing in Milan | BMWorks Performance'),
@@ -233,7 +252,7 @@ Do not wait until your BMW or MINI needs urgent work. Plan preventive maintenanc
 Customer satisfaction is our priority. We aim to deliver a servicing experience that exceeds expectations, combining quality, efficiency and excellent customer care. Join our growing list of satisfied customers.`),
   },
   {
-    key: 'svc-chain', slug: L('sostituzione-catene-di-distribuzione-bmw-e-mini', 'timing-chain-replacement'), card: 'svc-chain2.webp', hero: 'chain-5.webp',
+    key: 'svc-chain', slug: L('sostituzione-catene-di-distribuzione-bmw-e-mini', 'timing-chain-replacement'), card: 'chain-5.webp', hero: 'chain-b.webp',
     nav: L('Sostituzione catene di distribuzione', 'Timing chain replacement'),
     short: L('Intervento specialistico sui motori BMW e MINI, in particolare N47 e N57.', 'Specialist work on BMW and MINI engines, especially the N47 and N57.'),
     title: L('Sostituzione catena di distribuzione BMW e MINI (N47, N57) | BMWorks', 'BMW and MINI timing chain replacement (N47, N57) | BMWorks'),
@@ -312,7 +331,7 @@ ${PREV.en}
 BMWorks Performance offers a range of services beyond automatic gearbox maintenance. These include [ECU remapping](@remap), BMW and MINI-specific services, [mechanical and electrical repairs](@svc-repairs), [transfer case (4×4) maintenance and repair](@svc-xdrive), [coding, programming and software updates](@svc-coding) and much more. Every job is carried out with the same attention to detail and expertise as our automatic gearbox service.`),
   },
   {
-    key: 'svc-repairs', slug: L('riparazioni-meccaniche-ed-elettriche-bmw-e-mini', 'mechanical-electrical-repairs'), card: 'rep-3.webp', hero: 'rep-2.webp',
+    key: 'svc-repairs', slug: L('riparazioni-meccaniche-ed-elettriche-bmw-e-mini', 'mechanical-electrical-repairs'), card: 'real-engine.webp', hero: 'real-m3.webp', videos: ['m3', 'motore'],
     nav: L('Riparazioni meccaniche ed elettriche', 'Mechanical and electrical repairs'),
     short: L('Da Vanos e turbina ad alternatori, ABS/DSC e cablaggi: riparazioni garantite.', 'From Vanos and turbos to alternators, ABS/DSC and wiring: guaranteed repairs.'),
     title: L('Riparazioni meccaniche ed elettriche BMW e MINI a Milano | BMWorks', 'BMW and MINI mechanical and electrical repairs in Milan | BMWorks'),
@@ -402,10 +421,10 @@ We also offer cosmetic customisation, such as wheel changes and sports body kits
 Customer satisfaction is an absolute priority at BMWorks Performance. Every repair or service comes with a detailed explanation of the work carried out, along with advice on how best to look after the vehicle. What is more, **all repairs are guaranteed**, giving customers peace of mind and confidence in the quality of the work.
 
 BMWorks Performance also provides proactive after-sales care, contacting customers to make sure they are completely satisfied and their cars are running at their best. Our policy of transparency and honesty lets us build long-term relationships with our customers. Every job is carried out with care and attention to detail, using high-quality genuine parts. [Contact us today for a quote!](@contact)`),
-    gallery: ['rep-1.webp', 'rep-2.webp', 'rep-3.webp', 'rep-4.webp', 'rep-5.webp'],
+    gallery: ['rep-1.webp', 'rep-3.webp', 'rep-4.webp', 'rep-5.webp'],
   },
   {
-    key: 'svc-xdrive', slug: L('manutenzione-e-riparazione-del-ripartitore-di-copia-4x4', 'transfer-case-4x4'), card: 'svc-gearbox.webp',
+    key: 'svc-xdrive', slug: L('manutenzione-e-riparazione-del-ripartitore-di-copia-4x4', 'transfer-case-4x4'), card: 'blog-8361ed67.webp', hero: 'blog-930fde00.webp',
     nav: L('Ripartitore di coppia (4×4)', 'Transfer case (4×4)'),
     short: L('Manutenzione e riparazione del ripartitore xDrive per trazione e stabilità impeccabili.', 'xDrive transfer case maintenance and repair for flawless traction and stability.'),
     title: L('Manutenzione e riparazione ripartitore di coppia 4×4 BMW e MINI | BMWorks', 'BMW and MINI 4×4 transfer case maintenance and repair | BMWorks'),
@@ -493,7 +512,7 @@ Regular, professional maintenance not only guarantees optimum performance but al
 Proper maintenance means a better drive. Vehicles with a well-maintained transfer case offer greater stability, traction and more dependable control overall — essential for safe, enjoyable driving.`),
   },
   {
-    key: 'svc-coding', slug: L('bmw-e-mini-codifica-programmazione-e-aggiornamento-software', 'coding-programming-software-updates'), card: 'svc-diag.webp',
+    key: 'svc-coding', slug: L('bmw-e-mini-codifica-programmazione-e-aggiornamento-software', 'coding-programming-software-updates'), card: 'blog-6b6a3418.webp', videos: ['x6', 'mini'],
     nav: L('Codifica, programmazione e aggiornamento software', 'Coding, programming and software updates'),
     short: L('Sblocca le funzioni nascoste della tua BMW o MINI e aggiorna il software di bordo.', 'Unlock your BMW or MINI’s hidden features and update its on-board software.'),
     title: L('Codifica e aggiornamento software BMW e MINI | BMWorks Performance', 'BMW and MINI coding and software updates | BMWorks Performance'),
@@ -627,7 +646,7 @@ Some of our services:
 Trust the experience of BMWorks Performance to get the very most from your car. [Contact us](@contact) for more information or to book your coding and software update, and discover our [tuning services](@remap) to boost the performance of your BMW or MINI.`),
   },
   {
-    key: 'svc-diag', slug: L('diagnosi-computerizzata-bmw-e-mini', 'computer-diagnostics'), card: 'svc-remap2.webp',
+    key: 'svc-diag', slug: L('diagnosi-computerizzata-bmw-e-mini', 'computer-diagnostics'), card: 'blog-8af30e42.webp',
     nav: L('Diagnosi computerizzata', 'Computer diagnostics'),
     short: L('Diagnosi a livello di concessionaria su tutti i moduli elettronici, a una frazione del prezzo.', 'Dealer-level diagnostics across every electronic module, at a fraction of the price.'),
     title: L('Diagnosi computerizzata BMW e MINI a Milano | BMWorks Performance', 'BMW and MINI computer diagnostics in Milan | BMWorks Performance'),
@@ -677,7 +696,6 @@ Do not entrust your BMW or MINI’s diagnosis to general garages with universal 
 ## The importance of regular maintenance
 
 Alongside the computer check-up, it is essential to service your BMW or MINI regularly to safeguard performance, safety and longevity. BMWorks Performance offers [complete service packages](@svc-service), including oil changes, filter replacement and brake checks. Trust BMWorks Performance to keep your BMW or MINI in perfect condition.`),
-    gallery: ['svc-service.webp', 'svc-gearbox3.webp', 'svc-chain2.webp', 'svc-remap2.webp', 'svc-chain.webp', 'svc-gearbox.webp', 'svc-mini.webp', 'svc-remap.webp'],
   },
 ];
 

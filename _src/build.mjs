@@ -3,14 +3,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BIZ, UI, HOME, SERVICES, REMAP, OPTIONS, ABOUT, CONTACT, CARS, CARS_PAGE, BLOG, FAQ_PAGE, PRIVACY } from './content/site.mjs';
+import { BIZ, UI, HOME, VIDEOS, SERVICES, REMAP, OPTIONS, ABOUT, CONTACT, CARS, CARS_PAGE, BLOG, FAQ_PAGE, PRIVACY } from './content/site.mjs';
 
 const SRC = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(SRC, '..');
 // While the site is a preview it must not be indexed. Set to false (and check SITE_URL) at go-live.
 const PREVIEW = true;
 const SITE_URL = 'https://www.bmworks.it/';
-const V = '3';
+const V = '4';
 
 const faq = JSON.parse(fs.readFileSync(path.join(SRC, 'content/faq.json'), 'utf8')).items;
 const imgmap = JSON.parse(fs.readFileSync(path.join(SRC, 'content/imgmap.json'), 'utf8'));
@@ -64,6 +64,19 @@ const I = {
   tt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
   star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.700 5.800 6.300.800-4.600 4.400 1.200 6.300L12 17.200 6.400 20.300l1.200-6.300L3 9.600l6.300-.800z"/></svg>',
 };
+
+const vic = d => `<svg viewBox="0 0 64 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const VEH = {
+  car: vic('<path d="M3 28v-6l9-3 8-9h20l10 9 9 2.500V28h-6M21 28h20M22 19h26"/><circle cx="16" cy="29" r="5"/><circle cx="47" cy="29" r="5"/>'),
+  moto: vic('<circle cx="12" cy="28" r="8"/><circle cx="52" cy="28" r="8"/><path d="M12 28l10-13h13l7 13M35 15l7-7h7M22 15l-4-5h-7M28 28h14"/>'),
+  camper: vic('<path d="M3 30V10h36l14 9 8 2v9h-6M21 30h20M9 10V5h24v5"/><path d="M9 15h12v7H9zM28 15h9v7h-9z"/><circle cx="16" cy="31" r="5"/><circle cx="47" cy="31" r="5"/>'),
+  van: vic('<path d="M3 30V9h31l14 10 13 3v8h-7M21 30h20M34 9v11h14"/><circle cx="16" cy="31" r="5"/><circle cx="47" cy="31" r="5"/>'),
+};
+const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.500v13l11-6.500z"/></svg>';
+const videoCards = ids => `<div class="vids">${(ids ? VIDEOS.filter(v => ids.includes(v.id)) : VIDEOS).map(v => `<figure class="vid"><button type="button" class="vid-btn" data-video="${asset('video/' + v.file + '.mp4')}" aria-label="${t(HOME.vidPlay)}: ${esc(t(v.title))}"><img src="${img(v.poster)}" alt="" loading="lazy"><span class="vid-play">${PLAY}</span><span class="vid-len">${v.len}</span></button><figcaption>${esc(t(v.title))}</figcaption></figure>`).join('')}</div>`;
+const videoSection = () => `<section class="sec sec-dark"><div class="wrap">${secHead(t(HOME.vidKicker), t(HOME.vidTitle), t(HOME.vidText))}${videoCards()}<p class="center"><a class="btn btn-ghost" href="${BIZ.tt}" target="_blank" rel="noopener">${I.tt}${t(HOME.vidMore)}</a></p></div></section>`;
+const COVER = { 'riparazione-e-manutenzione-specializzata-guida': 'real-m2.webp', 'riparazioni-meccaniche-ed-elettriche-guida': 'real-engine.webp', 'sostituzione-catene-di-distribuzione-guida': 'chain-5.webp', 'svelare-la-potenza-della-rimappatura-centralina': 'blog-a97a96fd.webp' };
+const cover = p => COVER[p.slug] || imgmap[p.image];
 
 /* ---------- content blocks ---------- */
 function mdBlocks(src) {
@@ -179,7 +192,7 @@ const intro = () => `
   <span class="intro-road"></span>
   <button class="intro-skip" type="button">${t(UI.introSkip)}</button>
 </div>`;
-function page({ key, title, desc, body, ogImg = 'remap-auto.webp', schema = '', withIntro = false }) {
+function page({ key, title, desc, body, ogImg = 'real-m2.webp', schema = '' }) {
   const alt = l => SITE_URL + (R[key][l] ? R[key][l] + '/' : '');
   return `<!doctype html>
 <html lang="${cur.lang}">
@@ -187,7 +200,7 @@ function page({ key, title, desc, body, ogImg = 'remap-auto.webp', schema = '', 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>(function(){var p=location.pathname;if(location.protocol!=='file:'&&!/\\/$|\\.html$/.test(p))location.replace(p+'/'+location.search+location.hash)})()</script>
-${withIntro ? `<script>try{if(sessionStorage.getItem('bmw-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.className+=' intro-seen'}catch(e){}</script>` : ''}
+<script>(function(d){var c=' js';try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)c+=' intro-seen';else if(sessionStorage.getItem('bmw-intro'))c+=' intro-short';else c+=' intro-full'}catch(e){c+=' intro-seen'}d.className+=c})(document.documentElement)</script>
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 ${PREVIEW ? '<meta name="robots" content="noindex, nofollow">' : `<link rel="canonical" href="${alt(cur.lang)}">`}
@@ -208,7 +221,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex, nofollow">' : `<link rel="can
 ${schema}
 </head>
 <body data-lang="${cur.lang}" data-root="${root()}">
-${withIntro ? intro() : ''}${header()}
+${intro()}<div class="progress" aria-hidden="true"></div>${header()}
 <main id="main">
 ${body}
 </main>
@@ -235,7 +248,7 @@ const ctaBand = (h = t(UI.ctaTitle), p = t(UI.ctaText)) => `
 const secHead = (kicker, h2, p) => `<div class="sec-head">${kicker ? `<p class="kicker">${esc(kicker)}</p>` : ''}<h2>${esc(h2)}</h2>${p ? `<p>${esc(p)}</p>` : ''}</div>`;
 const serviceCards = (list = SERVICES, withRemap = false) => {
   const cards = list.map((s, i) => ({ n: i + 1, href: href(s.key), img: s.card, title: t(s.nav), text: t(s.short) }));
-  if (withRemap) cards.push({ n: cards.length + 1, href: href('remap'), img: 'svc-remap.webp', title: t(UI.nav.remapLookup), text: t(UI.remapShort) });
+  if (withRemap) cards.push({ n: cards.length + 1, href: href('remap'), img: 'blog-a97a96fd.webp', title: t(UI.nav.remapLookup), text: t(UI.remapShort) });
   return `<div class="cards">${cards.map(c => `
   <a class="card" href="${c.href}"><div class="card-img"><img src="${img(c.img)}" alt="" loading="lazy"><span class="card-n">${String(c.n).padStart(2, '0')}</span></div>
     <div class="card-body"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><span class="more">${t(UI.more)} ${I.arrow}</span></div></a>`).join('')}</div>`;
@@ -261,26 +274,30 @@ const localBiz = () => `<script type="application/ld+json">${JSON.stringify({ '@
 function home() {
   const H = HOME;
   return page({
-    key: 'home', title: t(H.title), desc: t(H.desc), schema: localBiz(), withIntro: true, body: `
-<section class="hero" style="--img:url('img/${('remap-auto.webp')}')"><div class="wrap hero-in">
+    key: 'home', title: t(H.title), desc: t(H.desc), schema: localBiz(), ogImg: 'hero-poster.webp', body: `
+<section class="hero hero-v" style="--img:url('img/hero-blur.webp')"><div class="wrap hero-grid">
+  <div class="hero-in">
   <p class="kicker">${t(H.kicker)}</p>
   <h1>${t(H.h1)}</h1>
   <p class="lead">${t(H.lead)}</p>
   <div class="hero-btns"><a class="btn btn-gold" href="${href('remap')}">${t(H.cta1)} ${I.arrow}</a><a class="btn btn-ghost" href="${href('services')}">${t(H.cta2)}</a></div>
   <ul class="hero-points">${t(H.points).map(p => `<li>${I.check}${esc(p)}</li>`).join('')}</ul>
+  </div>
+  <figure class="hero-media"><video autoplay muted loop playsinline preload="metadata" poster="${img('hero-poster.webp')}" src="${asset('video/hero.mp4')}" aria-hidden="true"></video><figcaption><i></i>${t(H.heroBadge)}</figcaption></figure>
 </div>
 <div class="wrap"><div class="hero-book"><div><span>${t(H.bookLabel)}</span><a href="tel:${BIZ.tel}">${BIZ.telNice}</a></div><a class="btn btn-wa btn-sm" href="${wa()}" target="_blank" rel="noopener">${I.wa}WhatsApp</a></div></div>
 </section>
 <section class="sec"><div class="wrap">${secHead(t(H.svcKicker), t(H.svcTitle), t(H.svcText))}${serviceCards(SERVICES, true)}</div></section>
+${videoSection()}
 <section class="sec sec-alt"><div class="wrap">${secHead(t(H.remapKicker), t(H.remapTitle), t(H.remapText))}
-  <div class="tiles">${H.remapTypes.map(r => `<a class="tile" href="${href('remap')}" style="--img:url('img/${(r.img)}')"><h3>${t(r.title)}</h3><p>${t(r.text)}</p><span class="more">${t(r.cta)} ${I.arrow}</span></a>`).join('')}</div>
+  <div class="tiles">${H.remapTypes.map(r => `<a class="tile" href="${href('remap')}"><span class="tile-ic">${VEH[r.icon]}</span><h3>${t(r.title)}</h3><p>${t(r.text)}</p><span class="more">${t(r.cta)} ${I.arrow}</span></a>`).join('')}</div>
 </div></section>
 <section class="sec"><div class="wrap split">
   <div>${secHead(t(H.benKicker), t(H.benTitle), t(H.benText))}<a class="btn btn-gold" href="${href('options')}">${t(H.benCta)} ${I.arrow}</a></div>
   <ul class="benefits">${H.benefits.map((b, i) => `<li><span class="num">${i + 1}</span><div><h3>${t(b.title)}</h3><p>${t(b.text)}</p></div></li>`).join('')}</ul>
 </div></section>
 <section class="sec sec-alt"><div class="wrap">${secHead(t(H.whyKicker), t(H.whyTitle))}
-  <div class="stats">${H.stats.map(s => `<div class="stat"><strong>${s.n}</strong><span>${t(s.label)}</span></div>`).join('')}</div>
+  <div class="stats">${H.stats.map(s => `<div class="stat"><strong data-count="${s.n.replace(/\D/g, '')}" data-pre="${s.n.match(/^\D*/)[0]}" data-suf="${s.n.match(/\D*$/)[0]}">${s.n}</strong><span>${t(s.label)}</span></div>`).join('')}</div>
 </div></section>
 <section class="sec"><div class="wrap">${secHead(t(H.revKicker), t(H.revTitle))}
   <div class="reviews" data-scroller>${H.reviews.map(r => `<figure class="review"><div class="stars">${I.star.repeat(5)}</div><blockquote>${esc(t(r.text))}</blockquote><figcaption><span class="av">${r.name[0]}</span><span><strong>${r.name}</strong><small>${r.place} · ${r.car}</small></span></figcaption></figure>`).join('')}</div>
@@ -296,12 +313,12 @@ ${latestPosts()}
   ${mapEmbed()}
 </div></section>` });
 }
-const postCard = p => `<a class="post" href="${href('post:' + p.slug)}"><div class="post-img"><img src="${img(imgmap[p.image])}" alt="" loading="lazy"></div><div class="post-body"><time datetime="${p.date}">${fmtDate(p.date)}</time><h3>${esc(p[cur.lang].title)}</h3><p>${esc(p[cur.lang].excerpt)}</p><span class="more">${t(UI.readMore)} ${I.arrow}</span></div></a>`;
+const postCard = p => `<a class="post" href="${href('post:' + p.slug)}"><div class="post-img"><img src="${img(cover(p))}" alt="" loading="lazy"></div><div class="post-body"><time datetime="${p.date}">${fmtDate(p.date)}</time><h3>${esc(p[cur.lang].title)}</h3><p>${esc(p[cur.lang].excerpt)}</p><span class="more">${t(UI.readMore)} ${I.arrow}</span></div></a>`;
 const latestPosts = () => `<section class="sec"><div class="wrap">${secHead('Blog', t(UI.latestPosts))}<div class="posts">${posts.slice(0, 3).map(postCard).join('')}</div><p class="center"><a class="btn btn-ghost" href="${href('blog')}">${t(UI.allPosts)} ${I.arrow}</a></p></div></section>`;
 
 function servicesIndex() {
   return page({ key: 'services', title: t(UI.servicesPage.title), desc: t(UI.servicesPage.desc), body: `
-${pageHero({ kicker: t(UI.servicesPage.kicker), h1: t(UI.servicesPage.h1), lead: t(UI.servicesPage.lead), image: 'svc-service.webp', trail: [[null, t(UI.nav.services)]] })}
+${pageHero({ kicker: t(UI.servicesPage.kicker), h1: t(UI.servicesPage.h1), lead: t(UI.servicesPage.lead), image: 'real-m2.webp', trail: [[null, t(UI.nav.services)]] })}
 <section class="sec"><div class="wrap">${serviceCards(SERVICES, true)}</div></section>${ctaBand()}` });
 }
 function servicePage(s) {
@@ -311,6 +328,7 @@ function servicePage(s) {
 ${pageHero({ kicker: t(UI.servicesPage.kicker), h1: t(s.h1), lead: t(s.lead), image: s.hero || s.card, trail: [['services', t(UI.nav.services)], [null, t(s.nav)]] })}
 <section class="sec"><div class="wrap article">
   <div>${prose(s.body)}
+    ${s.videos ? `<h2>${t(HOME.vidKicker)}</h2>${videoCards(s.videos)}` : ''}
     ${s.gallery ? `<h2>${t(UI.galleryTitle)}</h2>${gallery(s.gallery, t(s.nav))}` : ''}
     ${qa ? `<h2>${t(s.faqTitle || UI.faqTitle)}</h2>${faqList(qa)}` : ''}
   </div>
@@ -323,14 +341,14 @@ ${pageHero({ kicker: t(UI.servicesPage.kicker), h1: t(s.h1), lead: t(s.lead), im
 }
 function remap() {
   const P = REMAP;
-  return page({ key: 'remap', title: t(P.title), desc: t(P.desc), ogImg: 'svc-remap.webp', body: `
-${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'svc-remap2.webp', trail: [[null, t(UI.nav.remapLookup)]] })}
+  return page({ key: 'remap', title: t(P.title), desc: t(P.desc), ogImg: 'blog-a97a96fd.webp', body: `
+${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-affc3b0d.webp', trail: [[null, t(UI.nav.remapLookup)]] })}
 <section class="sec"><div class="wrap">${secHead(t(P.lookKicker), t(P.lookTitle), t(P.lookText))}
   <div class="lookup"><iframe title="${t(P.lookTitle)}" src="${BIZ.lookup}" loading="lazy"></iframe></div>
   <p class="note">${t(P.lookNote)} <a href="${BIZ.lookup}" target="_blank" rel="noopener">${t(P.lookOpen)}</a></p>
 </div></section>
 <section class="sec sec-alt"><div class="wrap">${secHead(t(HOME.remapKicker), t(HOME.remapTitle), t(HOME.remapText))}
-  <div class="tiles">${HOME.remapTypes.map(r => `<div class="tile" style="--img:url('img/${(r.img)}')"><h3>${t(r.title)}</h3><p>${t(r.text)}</p></div>`).join('')}</div></div></section>
+  <div class="tiles">${HOME.remapTypes.map(r => `<div class="tile"><span class="tile-ic">${VEH[r.icon]}</span><h3>${t(r.title)}</h3><p>${t(r.text)}</p></div>`).join('')}</div></div></section>
 <section class="sec"><div class="wrap split">
   <div>${prose(P.body)}<p class="btn-row"><a class="btn btn-gold" href="${href('options')}">${t(HOME.benCta)} ${I.arrow}</a><a class="btn btn-ghost" href="${href('faq')}">${t(UI.nav.remapFaq)}</a></p></div>
   <ul class="benefits">${HOME.benefits.map((b, i) => `<li><span class="num">${i + 1}</span><div><h3>${t(b.title)}</h3><p>${t(b.text)}</p></div></li>`).join('')}</ul>
@@ -338,8 +356,8 @@ ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'svc-rema
 }
 function options() {
   const P = OPTIONS;
-  return page({ key: 'options', title: t(P.title), desc: t(P.desc), ogImg: 'svc-remap.webp', body: `
-${pageHero({ kicker: t(REMAP.kicker), h1: t(P.h1), lead: t(P.lead), image: 'svc-remap.webp', trail: [['remap', t(UI.nav.remapLookup)], [null, t(UI.nav.options)]] })}
+  return page({ key: 'options', title: t(P.title), desc: t(P.desc), ogImg: 'blog-a97a96fd.webp', body: `
+${pageHero({ kicker: t(REMAP.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-b20fdc27.webp', trail: [['remap', t(UI.nav.remapLookup)], [null, t(UI.nav.options)]] })}
 <section class="sec"><div class="wrap narrow">${prose(P.intro)}</div></section>
 <section class="sec sec-alt"><div class="wrap">${secHead(t(P.tiersKicker), t(P.tiersTitle))}
   <div class="tiers">${P.tiers.map(x => `<article class="tier tier-${x.color}"><img src="${img('tier-' + x.color + '.webp')}" alt="BMWorks Performance ${x.name}" loading="lazy" width="300" height="74"><h3>Performance ${x.name}™</h3><p class="tier-tag">${t(x.tag)}</p><ul class="ticks">${t(x.points).map(p => `<li>${I.check}<span>${esc(p)}</span></li>`).join('')}</ul></article>`).join('')}</div>
@@ -350,7 +368,7 @@ function about() {
   const P = ABOUT;
   const qa = P.faq.map(f => [t(f.q), `<p>${esc(t(f.a))}</p>`]);
   return page({ key: 'about', title: t(P.title), desc: t(P.desc), schema: faqSchema(qa), body: `
-${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'svc-mini.webp', trail: [[null, t(UI.nav.about)]] })}
+${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-ec1378f3.webp', trail: [[null, t(UI.nav.about)]] })}
 <section class="sec"><div class="wrap split"><div>${prose(P.body)}</div>
   <div><figure class="quote"><blockquote>${t(P.quote)}</blockquote><figcaption><strong>${BIZ.founder}</strong><small>${t(P.founderRole)}</small></figcaption></figure>
   <div class="pillars">${P.pillars.map(x => `<div><h3>${t(x.title)}</h3><p>${t(x.text)}</p></div>`).join('')}</div></div>
@@ -360,8 +378,8 @@ ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'svc-mini
 }
 function contact() {
   const P = CONTACT;
-  return page({ key: 'contact', title: t(P.title), desc: t(P.desc), ogImg: 'contact.webp', schema: localBiz(), body: `
-${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'contact.webp', trail: [[null, t(UI.nav.contact)]] })}
+  return page({ key: 'contact', title: t(P.title), desc: t(P.desc), ogImg: 'blog-120697ac.webp', schema: localBiz(), body: `
+${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-120697ac.webp', trail: [[null, t(UI.nav.contact)]] })}
 <section class="sec"><div class="wrap split">
   <div>
     <div class="ways">
@@ -381,7 +399,7 @@ ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'contact.
 function carsIndex() {
   const P = CARS_PAGE;
   return page({ key: 'cars', title: t(P.title), desc: t(P.desc), ogImg: CARS[0].photos[0], body: `
-${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'svc-service.webp', trail: [[null, t(UI.nav.cars)]] })}
+${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'mini-photo_15.webp', trail: [[null, t(UI.nav.cars)]] })}
 <section class="sec"><div class="wrap">${secHead(t(P.featKicker), t(P.featTitle))}
   <div class="carlist">${CARS.map(c => `<a class="car" href="${href('car:' + c.slug)}"><div class="car-img"><img src="${img(c.photos[0])}" alt="${esc(c.name)}" loading="lazy"><span class="badge">${t(P.featured)}</span><span class="count">${c.photos.length} ${t(P.photos)}</span></div>
     <div class="car-body"><h3>${esc(c.name)}</h3><p class="car-sub">${t(c.sub)}</p><ul class="chips">${c.chips.map(x => `<li>${t(x)}</li>`).join('')}</ul><div class="car-foot"><strong>${t(c.price)}</strong><span class="more">${t(UI.details)} ${I.arrow}</span></div></div></a>`).join('')}</div>
@@ -415,19 +433,19 @@ function carPage(c) {
 }
 function blogIndex() {
   return page({ key: 'blog', title: t(BLOG.title), desc: t(BLOG.desc), body: `
-${pageHero({ kicker: 'Blog', h1: t(BLOG.h1), lead: t(BLOG.lead), image: 'rep-3.webp', trail: [[null, 'Blog']] })}
+${pageHero({ kicker: 'Blog', h1: t(BLOG.h1), lead: t(BLOG.lead), image: 'blog-7fabc1aa.webp', trail: [[null, 'Blog']] })}
 <section class="sec"><div class="wrap"><div class="posts">${posts.map(postCard).join('')}</div></div></section>
 <section class="sec sec-alt"><div class="wrap narrow"><div class="author"><span class="av">G</span><div><h3>${BIZ.founder}</h3><p>${t(BLOG.author)}</p></div></div></div></section>${ctaBand()}` });
 }
 function postPage(p) {
   const d = p[cur.lang];
-  const blocks = d.blocks.filter((b, i) => !(i < 3 && b.t === 'img' && b.src && imgmap[b.src] === imgmap[p.image]));
+  const blocks = d.blocks.filter((b, i) => !(i < 3 && b.t === 'img' && b.src && imgmap[b.src] === cover(p)));
   const others = posts.filter(o => o.slug !== p.slug).slice(0, 3);
-  const schema = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: d.title, datePublished: p.date, author: { '@type': 'Organization', name: 'BMWorks Performance' }, image: SITE_URL + 'assets/img/' + imgmap[p.image] }).replace(/</g, '\\u003c')}</script>`;
-  return page({ key: 'post:' + p.slug, title: `${d.title} | BMWorks Performance`, desc: d.excerpt, ogImg: imgmap[p.image], schema, body: `
+  const schema = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: d.title, datePublished: p.date, author: { '@type': 'Organization', name: 'BMWorks Performance' }, image: SITE_URL + 'assets/img/' + cover(p) }).replace(/</g, '\\u003c')}</script>`;
+  return page({ key: 'post:' + p.slug, title: `${d.title} | BMWorks Performance`, desc: d.excerpt, ogImg: cover(p), schema, body: `
 <article class="sec sec-top"><div class="wrap narrow">${crumbs([['blog', 'Blog'], [null, d.title]])}
   <header class="post-head"><time datetime="${p.date}">${fmtDate(p.date)}</time><h1>${esc(d.title)}</h1><p class="lead">${esc(d.excerpt)}</p></header>
-  <figure class="post-cover"><img src="${img(imgmap[p.image])}" alt=""></figure>
+  <figure class="post-cover"><img src="${img(cover(p))}" alt=""></figure>
   <div class="prose">${renderBlocks(blocks)}</div>
   <div class="author"><span class="av">G</span><div><h3>${BIZ.founder}</h3><p>${t(BLOG.author)}</p></div></div>
 </div></article>
@@ -436,7 +454,7 @@ function postPage(p) {
 function faqPage() {
   const qa = faq.map(f => [f.q[cur.lang], renderBlocks(f.a[cur.lang])]);
   return page({ key: 'faq', title: t(FAQ_PAGE.title), desc: t(FAQ_PAGE.desc), schema: faqSchema(qa), body: `
-${pageHero({ kicker: 'FAQ', h1: t(FAQ_PAGE.h1), lead: t(FAQ_PAGE.lead), image: 'svc-diag.webp', trail: [[null, 'FAQ']] })}
+${pageHero({ kicker: 'FAQ', h1: t(FAQ_PAGE.h1), lead: t(FAQ_PAGE.lead), image: 'blog-8af30e42.webp', trail: [[null, 'FAQ']] })}
 <section class="sec"><div class="wrap narrow">${faqList(qa)}<p class="note">${inline(t(FAQ_PAGE.note))}</p></div></section>${ctaBand()}` });
 }
 function privacy() {

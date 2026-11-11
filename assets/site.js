@@ -4,18 +4,51 @@
   var TEL = '393292949290', MAIL = 'info@bmworks.it';
   var lang = document.body.dataset.lang || 'it';
 
-  // intro animation: play once per visit, skippable
-  var intro = $('#intro');
+  // intro animation: full on the first page of a visit, short between pages; skippable
+  var intro = $('#intro'), rootEl = document.documentElement, reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (intro && getComputedStyle(intro).display !== 'none') {
-    var root = document.documentElement, gone = false;
-    root.classList.add('intro-lock');
-    var end = function () { if (gone) return; gone = true; root.classList.remove('intro-lock'); try { sessionStorage.setItem('bmw-intro', '1'); } catch (_) {} intro.remove(); };
+    var gone = false, short = rootEl.classList.contains('intro-short');
+    rootEl.classList.add('intro-lock');
+    var end = function () { if (gone) return; gone = true; rootEl.classList.remove('intro-lock'); try { sessionStorage.setItem('bmw-intro', '1'); } catch (_) {} intro.remove(); };
     var skip = function () { intro.classList.add('skip'); setTimeout(end, 450); };
     intro.addEventListener('animationend', function (e) { if (e.animationName === 'introOut') end(); });
     intro.addEventListener('click', skip);
     document.addEventListener('keydown', function k(e) { if (e.key === 'Escape') { skip(); document.removeEventListener('keydown', k); } });
-    setTimeout(end, 4200);
+    setTimeout(end, short ? 1900 : 4200);
   }
+  // curtain when leaving for another page of the site
+  if (!reduced) {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (a.target === '_blank' || a.hasAttribute('download') || a.origin !== location.origin) return;
+      if (a.closest('[data-gallery]') || a.getAttribute('href').charAt(0) === '#' || (a.pathname === location.pathname && a.hash)) return;
+      if (a.pathname === location.pathname && a.search === location.search) return;
+      e.preventDefault();
+      rootEl.classList.add('leaving');
+      setTimeout(function () { location.href = a.href; }, 270);
+    });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) rootEl.classList.remove('leaving'); });
+  }
+  // scroll progress bar
+  var bar = $('.progress');
+  if (bar) {
+    var tick = false, upd = function () { tick = false; var h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ')'; };
+    addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+  // videos: play in place, one at a time
+  $$('.vid-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('.vid video').forEach(function (o) { o.pause(); });
+      var v = document.createElement('video');
+      v.src = b.dataset.video; v.controls = true; v.autoplay = true; v.playsInline = true; v.setAttribute('playsinline', '');
+      v.poster = $('img', b).src;
+      b.replaceWith(v); v.focus();
+    });
+  });
+  var hv = $('.hero-media video');
+  if (hv && reduced) { hv.removeAttribute('autoplay'); hv.pause(); }
 
   // remember the language chosen with the IT / EN switch
   $$('.lang a').forEach(function (a) {
@@ -135,19 +168,26 @@
     calc();
   });
 
-  // count-up numbers + reveal on scroll
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // count-up numbers + staggered reveal on scroll
+  if ('IntersectionObserver' in window && !reduced) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
-        if (e.target.dataset.count) {
-          var end = +e.target.dataset.count, t0 = performance.now(), loc = lang === 'it' ? 'it-IT' : 'en-GB';
-          (function tick(t) { var p = Math.min((t - t0) / 1400, 1); e.target.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString(loc); if (p < 1) requestAnimationFrame(tick); })(t0);
-        } else e.target.classList.add('in');
+        var el = e.target;
+        if (el.dataset.count) {
+          var end = +el.dataset.count, pre = el.dataset.pre || '', suf = el.dataset.suf || '', t0 = performance.now(), loc = lang === 'it' ? 'it-IT' : 'en-GB';
+          (function tick(t) { var p = Math.min((t - t0) / 1500, 1); el.textContent = pre + Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString(loc) + suf; if (p < 1) requestAnimationFrame(tick); })(t0);
+        } else el.classList.add('in');
       });
-    }, { threshold: 0.12 });
-    $$('.card,.tile,.benefits li,.stat,.post,.tier,.car,.way').forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    var groups = {};
+    $$('.card,.tile,.benefits li,.stat,.post,.tier,.car,.way,.vid,.review,.pillars div,.faq details,.gallery a,.partners div').forEach(function (el) {
+      var k = el.parentNode; k.__i = (k.__i || 0); el.style.setProperty('--d', Math.min(k.__i++, 7) * 80 + 'ms');
+      el.classList.add('reveal'); io.observe(el);
+    });
+    $$('.sec-head,.prose figure,.quote,.side-box,.panel,.map,.lookup,.author,.cta-in,.viewer').forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+    $$('.split').forEach(function (sp) { var c = sp.children; if (c[0] && !c[0].classList.contains('reveal')) { c[0].classList.add('reveal', 'rv-l'); io.observe(c[0]); } });
     $$('[data-count]').forEach(function (el) { io.observe(el); });
   }
 })();
