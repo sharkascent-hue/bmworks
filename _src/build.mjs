@@ -10,7 +10,7 @@ const OUT = path.resolve(SRC, '..');
 // While the site is a preview it must not be indexed. Set to false (and check SITE_URL) at go-live.
 const PREVIEW = true;
 const SITE_URL = 'https://www.bmworks.it/';
-const V = '6';
+const V = '7';
 
 const faq = JSON.parse(fs.readFileSync(path.join(SRC, 'content/faq.json'), 'utf8')).items;
 const imgmap = JSON.parse(fs.readFileSync(path.join(SRC, 'content/imgmap.json'), 'utf8'));
@@ -78,6 +78,11 @@ const videoSection = () => `<section class="sec sec-dark"><div class="wrap">${se
 const COVER = { 'riparazione-e-manutenzione-specializzata-guida': 'real-m2.webp', 'riparazioni-meccaniche-ed-elettriche-guida': 'real-engine.webp', 'sostituzione-catene-di-distribuzione-guida': 'chain-5.webp', 'svelare-la-potenza-della-rimappatura-centralina': 'blog-a97a96fd.webp' };
 const cover = p => COVER[p.slug] || imgmap[p.image];
 
+const gNum = () => BIZ.google.rating.toLocaleString(cur.lang === 'it' ? 'it-IT' : 'en-GB', { minimumFractionDigits: 1 });
+const GLOGO = '<svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.600-.2-2.300H12v4.500h6.500a5.500 5.500 0 0 1-2.400 3.600v3h3.800c2.300-2.100 3.600-5.200 3.600-8.800z"/><path fill="#34A853" d="M12 24c3.200 0 6-1.100 7.900-2.900l-3.800-3c-1.100.7-2.500 1.200-4.100 1.200-3.100 0-5.800-2.100-6.700-5H1.300v3.100A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.300 14.300a7.200 7.200 0 0 1 0-4.600V6.600h-4a12 12 0 0 0 0 10.800z"/><path fill="#EA4335" d="M12 4.800c1.800 0 3.300.6 4.600 1.800l3.400-3.400A12 12 0 0 0 1.300 6.600l4 3.100c.9-2.800 3.600-4.900 6.700-4.900z"/></svg>';
+const gStars = () => `<span class="g-stars" style="--pct:${BIZ.google.rating / 5 * 100}%" role="img" aria-label="${gNum()} / 5"><span>★★★★★</span><span aria-hidden="true">★★★★★</span></span>`;
+const gBadge = (cls = '') => `<a class="g-badge ${cls}" href="${BIZ.google.url}" target="_blank" rel="noopener">${GLOGO}<strong>${gNum()}</strong>${gStars()}<span class="g-n">${t(HOME.gCount).replace('{n}', BIZ.google.count)}</span></a>`;
+
 /* ---------- content blocks ---------- */
 function mdBlocks(src) {
   return src.trim().split(/\n\s*\n/).map(b => {
@@ -144,7 +149,7 @@ function footer() {
 <footer class="footer"><div class="stripe"></div><div class="wrap footer-grid">
   <div><img class="footer-logo" src="${img('logo.webp')}" alt="BMWorks Performance" width="180" height="112" loading="lazy">
     <p>${t(UI.footerAbout)}</p>
-    <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="${BIZ.tt}" target="_blank" rel="noopener" aria-label="TikTok">${I.tt}</a></div></div>
+    <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="${BIZ.tt}" target="_blank" rel="noopener" aria-label="TikTok">${I.tt}</a></div>${gBadge('g-foot')}</div>
   <div><h3>${t(UI.nav.services)}</h3><ul>${svc}</ul></div>
   <div><h3>${t(UI.footerExplore)}</h3><ul>
     <li><a href="${href('remap')}">${t(UI.nav.remapLookup)}</a></li><li><a href="${href('options')}">${t(UI.nav.options)}</a></li>
@@ -294,6 +299,7 @@ function home() {
   <h1>${t(H.h1)}</h1>
   <p class="lead">${t(H.lead)}</p>
   <div class="hero-btns"><a class="btn btn-gold" href="${href('remap')}">${t(H.cta1)} ${I.arrow}</a><a class="btn btn-ghost" href="${href('services')}">${t(H.cta2)}</a></div>
+  ${gBadge('g-hero')}
   <ul class="hero-points">${t(H.points).map(p => `<li>${I.check}${esc(p)}</li>`).join('')}</ul>
   </div>
   <figure class="hero-media"><video autoplay muted loop playsinline preload="metadata" poster="${img('hero-poster.webp')}" src="${asset('video/hero.mp4')}" aria-hidden="true"></video><figcaption><i></i>${t(H.heroBadge)}</figcaption></figure>
@@ -313,7 +319,7 @@ ${videoSection()}
   <div class="stats">${H.stats.map(s => `<div class="stat"><strong data-count="${s.n.replace(/\D/g, '')}" data-pre="${s.n.match(/^\D*/)[0]}" data-suf="${s.n.match(/\D*$/)[0]}">${s.n}</strong><span>${t(s.label)}</span></div>`).join('')}</div>
 </div></section>
 <section class="sec"><div class="wrap">${secHead(t(H.revKicker), t(H.revTitle))}
-  <div class="reviews" data-scroller>${H.reviews.map(r => `<figure class="review"><div class="stars">${I.star.repeat(5)}</div><blockquote>${esc(t(r.text))}</blockquote><figcaption><span class="av">${r.name[0]}</span><span><strong>${r.name}</strong><small>${r.place} · ${r.car}</small></span></figcaption></figure>`).join('')}</div>
+  <div class="reviews" data-scroller><a class="review g-card" href="${BIZ.google.url}" target="_blank" rel="noopener">${GLOGO}<span class="g-big">${gNum()}</span>${gStars()}<span class="g-n">${t(H.gTitle)} · ${t(H.gCount).replace('{n}', BIZ.google.count)}</span><span class="more">${t(H.gRead)} ${I.arrow}</span></a>${H.reviews.map(r => `<figure class="review"><div class="stars">${I.star.repeat(5)}</div><blockquote>${esc(t(r.text))}</blockquote><figcaption><span class="av">${r.name[0]}</span><span><strong>${r.name}</strong><small>${r.place} · ${r.car}</small></span></figcaption></figure>`).join('')}</div>
 </div></section>
 <section class="sec sec-tight"><div class="wrap">${secHead('', t(H.partnersTitle))}
   <div class="partners">${['sp-autotuner.webp|AutoTuner', 'sp-alientech.webp|Alientech', 'sp-magic.webp|Magic Motorsport'].map(s => { const [f, n] = s.split('|'); return `<div><img src="${img(f)}" alt="${n}" loading="lazy"></div>`; }).join('')}</div>
@@ -401,6 +407,7 @@ ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-120
 <section class="sec"><div class="wrap split">
   <div>
     <div class="ways">
+      <a class="way" href="${BIZ.google.url}" target="_blank" rel="noopener">${GLOGO}<div><h3>Google</h3><strong>${gNum()} ${gStars()}</strong><p>${t(HOME.gCount).replace('{n}', BIZ.google.count)} · ${t(HOME.gWrite)}</p></div></a>
       <a class="way" href="tel:${BIZ.tel}">${I.phone}<div><h3>${t(P.phoneT)}</h3><strong>${BIZ.telNice}</strong><p>${t(P.phoneP)}</p></div></a>
       <a class="way" href="${wa()}" target="_blank" rel="noopener">${I.wa}<div><h3>WhatsApp</h3><strong>${BIZ.telNice}</strong><p>${t(P.waP)}</p></div></a>
       <a class="way" href="mailto:${BIZ.email}">${I.mail}<div><h3>Email</h3><strong>${BIZ.email}</strong><p>${t(P.mailP)}</p></div></a>

@@ -4,8 +4,10 @@ const L = (it, en) => ({ it, en });
 export const BIZ = {
   tel: '+393292949290', telNice: '+39 329 294 9290', wa: '393292949290',
   email: 'info@bmworks.it',
-  address: 'Via G. M. Serrati, 60 BIS — 20098 San Giuliano Milanese (MI)',
-  mapsLink: 'https://www.google.com/maps/search/?api=1&query=BMWorks+Performance+Via+Giacinto+Menotti+Serrati+60+San+Giuliano+Milanese',
+  address: 'Via G. M. Serrati, 60/bis — 20098 San Giuliano Milanese (MI)',
+  mapsLink: 'https://maps.app.goo.gl/Yw8zzajzCJdNUWQX6',
+  // Google Business listing (figures supplied by the owner's page)
+  google: { rating: 4.8, count: 27, url: 'https://maps.app.goo.gl/Yw8zzajzCJdNUWQX6' },
   mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2801.7402129614593!2d9.290649412068614!3d45.3944110709522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786cfb6432cc17f%3A0x8f6bf79af24fa8bb!2sVia%20Giacinto%20Menotti%20Serrati%2C%2060%2C%2020098%20San%20Giuliano%20Milanese%20MI!5e0!3m2!1sen!2sit!4v1715772839282!5m2!1sen!2sit',
   // Quantum Tuning only serves this tool when it is embedded on bmworks.it
   lookup: 'https://www.quantumtuning.co.uk/dealer-tool/responsive-vehicle-look-up-tool/international-dealers/bmworks-performance-italy-vehicle-lookup.aspx',
@@ -137,6 +139,10 @@ export const HOME = {
     { n: '96%', label: L('Soddisfazione del cliente', 'Customer satisfaction') },
   ],
   revKicker: L('Recensioni', 'Reviews'),
+  gTitle: L('Valutazione su Google', 'Rated on Google'),
+  gCount: L('{n} recensioni', '{n} reviews'),
+  gRead: L('Leggi le recensioni su Google', 'Read the reviews on Google'),
+  gWrite: L('Sei un nostro cliente? Lascia una recensione', 'A customer of ours? Leave a review'),
   revTitle: L('Cosa dicono i nostri clienti', 'What our customers say'),
   reviews: [
     { name: 'Marco', place: 'Osmate (VA)', car: 'Audi A3', text: L('Ho portato la mia Audi A3 da loro per una rimappatura e sono rimasto colpito dal risultato. Il mio veicolo ora ha un’accelerazione più fluida e veloce. Un team fantastico che offre un servizio eccellente. Consigliatissimo!', 'I took my Audi A3 to them for a remap and was impressed by the result. My car now accelerates more smoothly and quickly. A fantastic team offering excellent service. Highly recommended!') },
@@ -894,6 +900,7 @@ To be your reliable alternative to main dealers. We offer the same quality of se
   quote: L('Da BMWorks eleviamo ogni BMW e MINI con passione e maestria. La vostra soddisfazione, la nostra missione.', 'At BMWorks we elevate every BMW and MINI with passion and craftsmanship. Your satisfaction is our mission.'),
   founderRole: L('Fondatore e titolare, BMWorks Performance', 'Founder and owner, BMWorks Performance'),
   pillars: [
+    { title: L('4,8 ★ su Google', '4.8 ★ on Google'), text: L('Valutazione media su 27 recensioni dei nostri clienti.', 'Average rating from 27 customer reviews.') },
     { title: L('Trasparenza', 'Transparency'), text: L('Preventivi chiari e spiegazione dettagliata di ogni intervento.', 'Clear quotes and a detailed explanation of every job.') },
     { title: L('Ricambi originali', 'Genuine parts'), text: L('Per garantire prestazioni e sicurezza.', 'For guaranteed performance and safety.') },
     { title: L('Lavori garantiti', 'Guaranteed work'), text: L('Garanzia sui lavori eseguiti; dettagli su richiesta.', 'Warranty on the work we do; details on request.') },
