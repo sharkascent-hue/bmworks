@@ -10,7 +10,7 @@ const OUT = path.resolve(SRC, '..');
 // While the site is a preview it must not be indexed. Set to false (and check SITE_URL) at go-live.
 const PREVIEW = true;
 const SITE_URL = 'https://www.bmworks.it/';
-const V = '2';
+const V = '3';
 
 const faq = JSON.parse(fs.readFileSync(path.join(SRC, 'content/faq.json'), 'utf8')).items;
 const imgmap = JSON.parse(fs.readFileSync(path.join(SRC, 'content/imgmap.json'), 'utf8'));
@@ -61,6 +61,7 @@ const I = {
   chev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9.500 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   ig: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.300A4.700 4.700 0 1 0 12 16.700 4.700 4.700 0 0 0 12 7.300zm0 7.700a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm4.900-9a1.100 1.100 0 1 0 0 2.200 1.100 1.100 0 0 0 0-2.200zM16.500 3h-9A4.500 4.500 0 0 0 3 7.500v9A4.500 4.500 0 0 0 7.500 21h9a4.500 4.500 0 0 0 4.500-4.500v-9A4.500 4.500 0 0 0 16.500 3zm2.800 13.500a2.800 2.800 0 0 1-2.800 2.800h-9a2.800 2.800 0 0 1-2.800-2.800v-9a2.800 2.800 0 0 1 2.800-2.800h9a2.800 2.800 0 0 1 2.800 2.800z"/></svg>',
   fb: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.500 21v-7.500H16l.400-3h-2.900V8.600c0-.870.250-1.460 1.500-1.460h1.600V4.460A21 21 0 0 0 14.300 4.300c-2.300 0-3.800 1.400-3.800 3.900v2.300H8v3h2.500V21z"/></svg>',
+  tt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
   star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.700 5.800 6.300.800-4.600 4.400 1.200 6.300L12 17.200 6.400 20.300l1.200-6.300L3 9.600l6.300-.800z"/></svg>',
 };
 
@@ -130,7 +131,7 @@ function footer() {
 <footer class="footer"><div class="stripe"></div><div class="wrap footer-grid">
   <div><img class="footer-logo" src="${img('logo.webp')}" alt="BMWorks Performance" width="180" height="112" loading="lazy">
     <p>${t(UI.footerAbout)}</p>
-    <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a></div></div>
+    <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="${BIZ.tt}" target="_blank" rel="noopener" aria-label="TikTok">${I.tt}</a></div></div>
   <div><h3>${t(UI.nav.services)}</h3><ul>${svc}</ul></div>
   <div><h3>${t(UI.footerExplore)}</h3><ul>
     <li><a href="${href('remap')}">${t(UI.nav.remapLookup)}</a></li><li><a href="${href('options')}">${t(UI.nav.options)}</a></li>
@@ -154,7 +155,31 @@ function footer() {
 <div class="mobile-bar"><a href="tel:${BIZ.tel}">${I.phone}${t(UI.call)}</a><a href="${wa()}" target="_blank" rel="noopener">${I.wa}WhatsApp</a><a href="${href('contact')}">${I.mail}${t(UI.book)}</a></div>
 <script src="${asset('site.js')}?v=${V}" defer></script>`;
 }
-function page({ key, title, desc, body, ogImg = 'remap-auto.webp', schema = '' }) {
+const intro = () => `
+<div class="intro" id="intro" role="presentation">
+  <div class="intro-stage">
+    <img class="intro-logo" src="${img('logo.webp')}" alt="BMWorks Performance" width="432" height="87">
+    <span class="intro-bar"></span>
+    <p class="intro-tag">${t(UI.introTag)}</p>
+    <div class="intro-car" aria-hidden="true"><span class="intro-streak"></span>
+      <svg viewBox="0 0 620 190">
+        <defs><linearGradient id="ib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f48"/><stop offset=".55" stop-color="#14161a"/><stop offset="1" stop-color="#050506"/></linearGradient>
+        <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fc4e8" stop-opacity=".55"/><stop offset="1" stop-color="#1c2836" stop-opacity=".9"/></linearGradient>
+        <linearGradient id="il" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffe9a6" stop-opacity=".75"/><stop offset="1" stop-color="#ffe9a6" stop-opacity="0"/></linearGradient></defs>
+        <path d="M586 112 L760 92 L760 150 L586 124Z" fill="url(#il)"/>
+        <ellipse cx="310" cy="172" rx="290" ry="9" fill="#000" opacity=".55"/>
+        <path d="M20 132C20 112 40 104 80 100L150 90C185 62 230 46 290 44L360 44C410 46 450 64 480 88L545 98C572 102 584 112 584 128L584 136L522 136A42 42 0 0 0 438 136L192 136A42 42 0 0 0 108 136L20 136Z" fill="url(#ib)" stroke="#5b616b" stroke-width="1.5"/>
+        <path d="M172 90C202 66 242 56 292 54L302 54L302 90Z M314 54L358 54C400 56 432 70 456 90L314 90Z" fill="url(#ig)"/>
+        <path d="M60 112L520 112" stroke="#f6b40e" stroke-width="2.5" opacity=".9"/>
+        <path d="M556 104l24 6v8l-26-4z" fill="#ffe9a6"/><path d="M20 112h16v12H20z" fill="#e03131"/>
+        <g class="intro-wheel"><circle cx="150" cy="138" r="36" fill="#0a0a0b" stroke="#2a2d33" stroke-width="3"/><circle cx="150" cy="138" r="22" fill="none" stroke="#9aa0aa" stroke-width="3"/><path d="M150 116v44M128 138h44M134.500 122.500l31 31M165.500 122.500l-31 31" stroke="#9aa0aa" stroke-width="3"/><circle cx="150" cy="138" r="5" fill="#f6b40e"/></g>
+        <g class="intro-wheel"><circle cx="480" cy="138" r="36" fill="#0a0a0b" stroke="#2a2d33" stroke-width="3"/><circle cx="480" cy="138" r="22" fill="none" stroke="#9aa0aa" stroke-width="3"/><path d="M480 116v44M458 138h44M464.500 122.500l31 31M495.500 122.500l-31 31" stroke="#9aa0aa" stroke-width="3"/><circle cx="480" cy="138" r="5" fill="#f6b40e"/></g>
+      </svg></div>
+  </div>
+  <span class="intro-road"></span>
+  <button class="intro-skip" type="button">${t(UI.introSkip)}</button>
+</div>`;
+function page({ key, title, desc, body, ogImg = 'remap-auto.webp', schema = '', withIntro = false }) {
   const alt = l => SITE_URL + (R[key][l] ? R[key][l] + '/' : '');
   return `<!doctype html>
 <html lang="${cur.lang}">
@@ -162,6 +187,7 @@ function page({ key, title, desc, body, ogImg = 'remap-auto.webp', schema = '' }
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>(function(){var p=location.pathname;if(location.protocol!=='file:'&&!/\\/$|\\.html$/.test(p))location.replace(p+'/'+location.search+location.hash)})()</script>
+${withIntro ? `<script>try{if(sessionStorage.getItem('bmw-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.className+=' intro-seen'}catch(e){}</script>` : ''}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 ${PREVIEW ? '<meta name="robots" content="noindex, nofollow">' : `<link rel="canonical" href="${alt(cur.lang)}">`}
@@ -182,7 +208,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex, nofollow">' : `<link rel="can
 ${schema}
 </head>
 <body data-lang="${cur.lang}" data-root="${root()}">
-${header()}
+${withIntro ? intro() : ''}${header()}
 <main id="main">
 ${body}
 </main>
@@ -229,13 +255,13 @@ const contactForm = (subject = '') => `
   <div class="form-btns"><button class="btn btn-wa" type="submit" data-via="wa">${I.wa}${t(UI.form.viaWa)}</button><button class="btn btn-ghost" type="submit" data-via="mail">${I.mail}${t(UI.form.viaMail)}</button></div>
   <p class="form-note">${t(UI.form.note)}</p>
 </form>`;
-const localBiz = () => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'AutoRepair', name: 'BMWorks Performance', url: SITE_URL, image: SITE_URL + 'assets/img/logo.webp', telephone: BIZ.tel, email: BIZ.email, address: { '@type': 'PostalAddress', streetAddress: 'Via Giacinto Menotti Serrati, 60 BIS', postalCode: '20098', addressLocality: 'San Giuliano Milanese', addressRegion: 'MI', addressCountry: 'IT' }, geo: { '@type': 'GeoCoordinates', latitude: 45.394594, longitude: 9.293357 }, openingHours: 'Mo-Fr 09:00-18:00', sameAs: [BIZ.ig, BIZ.fb] })}</script>`;
+const localBiz = () => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'AutoRepair', name: 'BMWorks Performance', url: SITE_URL, image: SITE_URL + 'assets/img/logo.webp', telephone: BIZ.tel, email: BIZ.email, address: { '@type': 'PostalAddress', streetAddress: 'Via Giacinto Menotti Serrati, 60 BIS', postalCode: '20098', addressLocality: 'San Giuliano Milanese', addressRegion: 'MI', addressCountry: 'IT' }, geo: { '@type': 'GeoCoordinates', latitude: 45.394594, longitude: 9.293357 }, openingHours: 'Mo-Fr 09:00-18:00', sameAs: [BIZ.ig, BIZ.fb, BIZ.tt] })}</script>`;
 
 /* ---------- pages ---------- */
 function home() {
   const H = HOME;
   return page({
-    key: 'home', title: t(H.title), desc: t(H.desc), schema: localBiz(), body: `
+    key: 'home', title: t(H.title), desc: t(H.desc), schema: localBiz(), withIntro: true, body: `
 <section class="hero" style="--img:url('img/${('remap-auto.webp')}')"><div class="wrap hero-in">
   <p class="kicker">${t(H.kicker)}</p>
   <h1>${t(H.h1)}</h1>
@@ -345,7 +371,7 @@ ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'contact.
       <a class="way" href="${BIZ.mapsLink}" target="_blank" rel="noopener">${I.pin}<div><h3>${t(P.addrT)}</h3><strong>${BIZ.address}</strong><p>${t(P.addrP)}</p></div></a>
     </div>
     <h3 class="mt">${t(P.socialT)}</h3><p>${t(P.socialP)}</p>
-    <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a></div>
+    <div class="social"><a href="${BIZ.ig}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${BIZ.fb}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="${BIZ.tt}" target="_blank" rel="noopener" aria-label="TikTok">${I.tt}</a></div>
   </div>
   <div class="panel"><h2>${t(P.formT)}</h2><p>${t(P.formP)}</p>${contactForm()}
     <h3 class="mt">${t(P.nextT)}</h3><p>${t(P.nextP)}</p></div>

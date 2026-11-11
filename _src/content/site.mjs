@@ -9,6 +9,7 @@ export const BIZ = {
   mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2801.7402129614593!2d9.290649412068614!3d45.3944110709522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786cfb6432cc17f%3A0x8f6bf79af24fa8bb!2sVia%20Giacinto%20Menotti%20Serrati%2C%2060%2C%2020098%20San%20Giuliano%20Milanese%20MI!5e0!3m2!1sen!2sit!4v1715772839282!5m2!1sen!2sit',
   lookup: 'https://www.quantumtuning.co.uk/dealer-tool/responsive-vehicle-look-up-tool/international-dealers/bmworks-performance-italy-vehicle-lookup.aspx',
   ig: 'https://www.instagram.com/bmworks.it/', fb: 'https://www.facebook.com/BMWorks.it',
+  tt: 'https://www.tiktok.com/@bmworks.performan',
   founder: 'Gicu Plamadeala',
   agents: [
     { name: 'Giku M.', num: '393292949290', role: L('Assistenza', 'Support') },
@@ -18,6 +19,8 @@ export const BIZ = {
 
 export const UI = {
   skip: L('Vai al contenuto', 'Skip to content'),
+  introSkip: L('Salta l’animazione', 'Skip the animation'),
+  introTag: L('Specialista indipendente BMW e MINI', 'Independent BMW & MINI specialist'),
   mainNav: L('Navigazione principale', 'Main navigation'),
   langLabel: L('Lingua', 'Language'),
   hours: L('Lun–Ven 9:00–18:00', 'Mon–Fri 9:00–18:00'),

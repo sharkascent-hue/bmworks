@@ -4,6 +4,19 @@
   var TEL = '393292949290', MAIL = 'info@bmworks.it';
   var lang = document.body.dataset.lang || 'it';
 
+  // intro animation: play once per visit, skippable
+  var intro = $('#intro');
+  if (intro && getComputedStyle(intro).display !== 'none') {
+    var root = document.documentElement, gone = false;
+    root.classList.add('intro-lock');
+    var end = function () { if (gone) return; gone = true; root.classList.remove('intro-lock'); try { sessionStorage.setItem('bmw-intro', '1'); } catch (_) {} intro.remove(); };
+    var skip = function () { intro.classList.add('skip'); setTimeout(end, 450); };
+    intro.addEventListener('animationend', function (e) { if (e.animationName === 'introOut') end(); });
+    intro.addEventListener('click', skip);
+    document.addEventListener('keydown', function k(e) { if (e.key === 'Escape') { skip(); document.removeEventListener('keydown', k); } });
+    setTimeout(end, 4200);
+  }
+
   // remember the language chosen with the IT / EN switch
   $$('.lang a').forEach(function (a) {
     a.addEventListener('click', function (e) {
