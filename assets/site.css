@@ -520,3 +520,6 @@ h1,h2,h3{overflow-wrap:break-word}
 .g-card .g-n{color:var(--mut);font-size:.9rem}
 .way .g-logo{width:26px;height:26px;margin-top:4px}
 .way strong .g-stars{font-size:.95rem;margin-left:4px}
+html.menu-open{overflow:hidden}
+html.menu-open body{touch-action:none}
+html.menu-open .nav{touch-action:pan-y;overscroll-behavior:contain}

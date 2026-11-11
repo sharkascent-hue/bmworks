@@ -71,12 +71,18 @@
   // mobile menu + dropdowns
   var header = $('#header'), nav = $('#nav'), burger = $('#burger');
   function setH() { document.documentElement.style.setProperty('--hh', header.getBoundingClientRect().bottom + 'px'); }
-  burger.addEventListener('click', function () {
+  // lock scrolling on <html>, not <body>: locking <body> turns it into a scroll box,
+  // which un-sticks the header and carries the open menu off-screen
+  function setMenu(open) {
     setH();
-    var open = nav.classList.toggle('open');
+    nav.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
+    document.documentElement.classList.toggle('menu-open', open);
+  }
+  burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+  addEventListener('resize', function () { if (innerWidth > 1100 && nav.classList.contains('open')) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) setMenu(false); });
   $$('.dd-btn').forEach(function (b) {
     b.addEventListener('click', function (e) {
       e.stopPropagation();
