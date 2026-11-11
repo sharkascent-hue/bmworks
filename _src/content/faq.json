@@ -1,0 +1,247 @@
+{
+  "items": [
+    {
+      "q": {"it": "Cosa fate esattamente?", "en": "What exactly do you do?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "I nostri tecnici si collegano alla centralina, il \"cervello\" del veicolo, con un PC portatile attraverso la presa diagnostica e leggono il file di gestione motore originale, che viene poi inviato al nostro reparto file e ottimizzato su misura per il tuo veicolo. Il tecnico programma quindi il nuovo file ottimizzato Quantum sul veicolo e a quel punto puoi provare tu stesso gli incredibili risultati. Su alcuni veicoli non è possibile eseguire l'operazione attraverso la presa diagnostica: in questo caso la centralina viene rimossa e si interviene direttamente su di essa, con una modifica del chip o una programmazione diretta in boot mode. Il risultato finale è esattamente lo stesso, cambia solo il procedimento. A seconda del veicolo, la rimappatura richiede di solito meno di un'ora. Puoi scegliere di recarti presso uno dei nostri concessionari, presso la nostra sede principale a Iver oppure, a seconda della zona, possiamo venire noi da te, a casa o in ufficio."}
+        ],
+        "en": [
+          {"t": "p", "x": "Our technicians connect to the ECU, the vehicle's \"brain\", with a laptop through the diagnostic socket and read the original engine management file, which is then sent to our file department and optimised specifically for your vehicle. The technician then programs the new optimised Quantum file into your vehicle, and at that point you can experience the incredible results for yourself. On some vehicles this cannot be done through the diagnostic socket: in that case the ECU is removed and the work is carried out directly on it, with a chip change or direct boot-mode programming. The end result is exactly the same; only the process differs. Depending on the vehicle, the remap usually takes less than an hour. You can choose to visit one of our dealers or our head office in Iver or, depending on the area, we can come to you at home or at the office."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "È sicuro per il veicolo?", "en": "Is it safe for the vehicle?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Il nostro processo di rimappatura Quantum migliora e ottimizza la potenza del motore entro limiti di sicurezza, mai oltre. Una maggiore potenza si traduce anche in meno cambi di marcia. I costruttori devono prevedere un margine di tolleranza per i componenti del motore, per tenere conto dell'usura e delle variazioni di produzione e per ridurre al minimo le richieste di intervento in garanzia durante il periodo di copertura, normalmente di 3 anni."},
+          {"t": "p", "x": "La maggior parte dei motori da corsa e da rally viene spinta fino all'ultimo cavallo, e per questo è più soggetta a rotture, mentre i normali motori di auto, furgoni e camion sono depotenziati e restano ben lontani dal rischio di guasti a catena. Ogni motore è diverso per quanto può essere spinto con una rimappatura, ma una buona rimappatura eseguita da un preparatore di qualità non si avvicinerà mai ai limiti di rottura dei componenti."},
+          {"t": "p", "x": "Noterai che le migliori aziende sul mercato hanno tutte sviluppato incrementi di prestazioni simili. Diffida dei tuner che dichiarano valori sensibilmente superiori: o mentono, sperando che il cliente medio non sia in grado di notare la differenza, oppure il motore viene spinto troppo e diventerà rapidamente inaffidabile."}
+        ],
+        "en": [
+          {"t": "p", "x": "Our Quantum remapping process improves and optimises engine power within safe limits, never beyond them. More power also means fewer gear changes. Manufacturers have to build in a tolerance for engine parts, to allow for wear and production variations and to keep warranty claims to a minimum during the warranty period, which is normally 3 years."},
+          {"t": "p", "x": "Most race and rally engines are pushed for every last bhp and are therefore more prone to failure, whereas ordinary car, van and lorry engines are detuned and sit well away from the likelihood of multiple failures. Every engine is different in how far it can be pushed with a remap, but a good remap from a quality tuner will never come close to the failure limits of the components."},
+          {"t": "p", "x": "You will find that the best companies in the market have all developed similar performance gains. Be wary of tuners who claim significantly more: either they are lying, hoping the average customer will not be able to tell the difference, or the engine is being pushed too hard and will quickly become unreliable."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Perché i produttori non lo fanno?", "en": "Why don't manufacturers do this?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "In generale i costruttori vendono un veicolo destinato a mercati diversi, con differenti normative fiscali e sulle emissioni, climi diversi con estremi di caldo, freddo e umidità, differenti qualità di carburante, diverse altitudini di utilizzo e così via. Un costruttore deve tenere conto di tutti questi fattori e accettare notevoli compromessi nel funzionamento del veicolo."},
+          {"t": "p", "x": "Anche vendite e marketing hanno un grande peso sul modo in cui un motore viene mappato. Se guardi le specifiche del motore nella brochure del costruttore, la curva di coppia sale, poi si appiattisce in una linea retta e infine scende. Ovviamente non è così che respira un motore: è una richiesta di vendite e marketing quella di ottenere questa curva di coppia piatta. Perché? Si tratta di avere valori di coppia migliori rispetto alla concorrenza e di rispettare le leggi fiscali del mercato locale."}
+        ],
+        "en": [
+          {"t": "p", "x": "Manufacturers generally sell a vehicle that has to cover various markets, with different tax and emissions regulations, different climates with extremes of heat, cold and humidity, different fuel qualities, different operating altitudes and so on. A manufacturer has to take all these factors into account and make considerable compromises in how the vehicle operates."},
+          {"t": "p", "x": "Sales and marketing also have a big influence on the way an engine is mapped. If you look at the engine specifications in the manufacturer's brochure, the torque curve rises, then flattens into a straight line and then drops. Obviously that is not how an engine breathes: this flat torque line is a sales and marketing requirement. Why? It is about having better torque figures than the competition and about the tax laws of the local market."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Che garanzia offrite?", "en": "What guarantee do you offer?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Un motore messo a punto in modo professionale non causa guasti tecnici, se è ben tenuto e sottoposto a regolare manutenzione. Nel caso estremamente improbabile di un problema, garantiamo al 100% la qualità del nostro prodotto, qualora si accerti che il difetto sia stato causato dall'aggiornamento."}
+        ],
+        "en": [
+          {"t": "p", "x": "A professionally tuned engine will not cause technical failures, provided it is well maintained and regularly serviced. In the extremely unlikely event of a problem, we stand 100% behind the quality of our product, should any fault be found to have been caused by the upgrade."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Potete spiegare cos'è la rimappatura?", "en": "Can you explain what remapping is?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Se vuoi elaborare il tuo veicolo diesel mantenendo le funzioni di sicurezza e la durata di motore, trasmissione ed ESP, l'unico modo è intervenire sul sistema di controllo motore esistente. È esattamente ciò che offriamo con una rimappatura Quantum. Il nostro processo di messa a punto mantiene in ogni momento il controllo totale di tutti i parametri e non altera le funzioni di sicurezza dell'auto ingannando il sistema. Oltre agli evidenti benefici in termini di potenza, coppia e risparmio di carburante, con una rimappatura Quantum ottieni i seguenti vantaggi:"},
+          {"t": "ul", "items": [
+            "La rimappatura Quantum viene installata entro un'ora, di solito senza nemmeno aprire il cofano",
+            "Dopo l'intervento non serve collegare nulla al veicolo per ottenerne i benefici",
+            "Niente scatole e cavi volanti nel vano motore",
+            "La coppia arriva in modo morbido e progressivo",
+            "La coppia è regolata/limitata nelle marce basse (per evitare danni alla trasmissione)",
+            "La pressione di sovralimentazione e il flusso d'aria sono ottimizzati",
+            "Le impostazioni originali possono essere ripristinate, se necessario",
+            "Il computer di bordo indica il consumo di carburante corretto",
+            "Il funzionamento del controllo elettronico di stabilità (ESP) è pienamente mantenuto",
+            "La riduzione della coppia durante i cambi di marcia (per comfort e durata) è mantenuta",
+            "La rigenerazione (svuotamento) del filtro antiparticolato diesel (DPF) è ottimale",
+            "Calcolo corretto della temperatura dei gas di scarico",
+            "Calcolo corretto dell'intervallo di manutenzione",
+            "Il sistema diagnostico è mantenuto",
+            "Nessun aumento delle emissioni di NOx, HC, CO, CO2 e particolato rispetto all'originale, in sede di revisione e di tagliando"
+          ]}
+        ],
+        "en": [
+          {"t": "p", "x": "If you want to tune your diesel vehicle while keeping the safety functions and the durability of the engine, transmission and ESP, the only way is to make changes within the existing engine control system. That is exactly what we offer with a Quantum remap. Our tuning process keeps total control over all parameters at all times and does not interfere with the car's safety functions by fooling the system. Besides the obvious benefits in power, torque and fuel economy, a Quantum remap gives you the following advantages:"},
+          {"t": "ul", "items": [
+            "The Quantum remap is installed within the hour, usually without even lifting the bonnet",
+            "Nothing needs to be connected to the vehicle after tuning to get the benefits",
+            "No boxes or loose wires in the engine bay",
+            "Torque comes in softly and smoothly",
+            "Torque is regulated/limited in the lower gears (to avoid damage to the transmission)",
+            "Boost pressure and airflow are optimised",
+            "The original settings can be reinstalled if necessary",
+            "The on-board computer shows the correct fuel consumption",
+            "The electronic stability programme (ESP) remains fully functional",
+            "Torque reduction when changing gear (for comfort and durability) is retained",
+            "Regeneration (emptying) of the diesel particulate filter (DPF) is optimal",
+            "Correct calculation of exhaust gas temperature",
+            "Correct calculation of the service interval",
+            "The diagnostic system is retained",
+            "No increase in NOx, HC, CO, CO2 or soot emissions compared with the original at MOT and service time"
+          ]}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Offrite un periodo di prova?", "en": "Do you offer a trial period?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Siamo certi che la tua rimappatura Quantum migliorerà la tua esperienza di guida e ti farà risparmiare sensibilmente sul carburante. Ma non fidarti solo della nostra parola: prova l'aggiornamento per 30 giorni e, se non sei soddisfatto dei risultati, lo rimuoveremo e ti rimborseremo l'intero importo."}
+        ],
+        "en": [
+          {"t": "p", "x": "We are very confident that your Quantum remap will improve your driving experience and save you a considerable amount on fuel. But don't just take our word for it: try the upgrade for 30 days and, if you are not satisfied with the results, we will remove it and refund you in full."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Cosa succede con l'assicurazione?", "en": "What about insurance?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Ti ricordiamo che è tua responsabilità informare la compagnia assicurativa di qualsiasi modifica apportata al veicolo. Stiamo riscontrando che sempre più compagnie non penalizzano i clienti per un intervento volto al risparmio di carburante e riconoscono le nostre rimappature orientate ai consumi. Se necessario, possiamo fornire un certificato di conformità."}
+        ],
+        "en": [
+          {"t": "p", "x": "Please note that it is your responsibility to inform your insurance company of any modification to your vehicle. We are finding that more and more insurers do not penalise their customers for a fuel-saving upgrade and recognise our economy remaps. We can provide a certificate of conformity if required."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Conservate una copia del file di tuning originale?", "en": "Do you keep a copy of the original tuning file?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Sì, in un archivio sicuro, nel caso in cui tu abbia bisogno di riportare il veicolo alle condizioni originali."}
+        ],
+        "en": [
+          {"t": "p", "x": "Yes, in a secure archive, in case you ever need to return your vehicle to its original condition."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Questo influisce sulla garanzia del produttore?", "en": "Does this affect the manufacturer's warranty?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Alcuni strumenti diagnostici del costruttore potrebbero rilevare una rimappatura. D'altra parte, molti costruttori lungimiranti chiudono un occhio su una rimappatura di qualità, sapendo che un veicolo potenziato a regola d'arte non può che giovare loro. La posizione ufficiale della maggior parte dei costruttori è che, se una modifica causa un problema al veicolo, la parte interessata non sarà coperta da garanzia; questo non significa l'annullamento unilaterale dell'intera garanzia."}
+        ],
+        "en": [
+          {"t": "p", "x": "Some manufacturer diagnostic tools may detect a remap. That said, many forward-thinking manufacturers turn a blind eye to a quality remapping service, knowing that a properly upgraded vehicle can only benefit them. The official line of most manufacturers is that if a modification causes a problem with the vehicle, the affected part will not be covered by the warranty; this does not mean a unilateral cancellation of the entire warranty."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Come migliora il veicolo la rimappatura?", "en": "How does remapping improve the vehicle?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Una rimappatura completa del motore Quantum modifica le caratteristiche di alimentazione, del turbo e della coppia del motore, controllando la pressione del carburante, la quantità di carburante iniettata, il limite massimo di fumosità visibile, la pressione del turbo e la curva di coppia."},
+          {"t": "p", "x": "Una rimappatura Quantum offre una modifica completamente controllabile delle caratteristiche del motore, operando sempre con il pieno controllo in retroazione del motore ed entro tutti i limiti preimpostati dai sensori."}
+        ],
+        "en": [
+          {"t": "p", "x": "A full Quantum engine remap changes the engine's fuelling, turbo and torque characteristics by controlling fuel pressure, the quantity of fuel injected, the maximum visible smoke limit, turbo pressure and the torque curve."},
+          {"t": "p", "x": "A Quantum remap offers a fully controllable modification of the engine's characteristics, while still operating with full engine feedback control and within all the limits preset by the engine's sensors."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Cosa fanno le centraline aggiuntive diesel?", "en": "What do diesel tuning boxes do?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Non montiamo centraline aggiuntive, che normalmente si limitano a interferire con i segnali di gestione del motore per indurre gli iniettori ad aggiungere più carburante. Il nostro servizio è una rimappatura personalizzata della tua centralina (ECU), specifica per il tuo veicolo."},
+          {"t": "p", "x": "Le centraline aggiuntive funzionano in modo diverso da una rimappatura. Si basano sul principio che più gasolio = più potenza. La teoria è corretta e le centraline aggiuntive aumentano effettivamente la potenza, ma non possono controllare la quantità di fumo nero (il limite massimo di fumosità visibile) che esce dallo scarico."},
+          {"t": "p", "x": "Troppo fumo è indesiderabile, sia dal punto di vista ambientale sia da quello estetico. Soprattutto, il fumo nero è gasolio incombusto che si deposita nella camera di combustione e i cui residui escono direttamente dal tubo di scarico: è quindi carburante sprecato, che non ha contribuito in alcun modo all'aumento di potenza. Ne derivano un aumento delle emissioni, un carico termico più elevato sul motore (cioè una maggiore temperatura dei gas di scarico) e spesso difetti come gli \"strappi\". Dovrebbe essere chiaro che cosa questo significhi per il tuo motore."},
+          {"t": "p", "x": "In un motore moderno ci sono complessi sistemi di controllo che collaborano tra loro per far funzionare tutto alla perfezione. Una centralina aggiuntiva diesel manipola alcuni segnali per aumentare il tempo di iniezione o la pressione del carburante. Purtroppo questa manipolazione avviene del tutto all'insaputa del sistema di controllo motore. Ciò significa che una centralina aggiuntiva inganna il sistema di controllo motore del veicolo, con il risultato che un gran numero di valori e di dati di controllo saranno errati, con conseguenze come:"},
+          {"t": "ul", "items": [
+            "Il computer di bordo indica un consumo di carburante migliore, ma la quantità reale rimasta nel serbatoio è inferiore, perché il carburante viene iniettato senza che alcun sensore rilevi la quantità aggiuntiva che entra nel cilindro.",
+            "Il controllo elettronico di stabilità (ESP) è disturbato a causa del valore di coppia errato.",
+            "Scatole e cablaggi volanti nel vano motore.",
+            "I cambi automatici ricevono un valore di coppia errato.",
+            "La riduzione della coppia durante i cambi di marcia (per comfort e durata) non viene mantenuta.",
+            "La rigenerazione (svuotamento) del filtro antiparticolato non sarà ottimale.",
+            "Il calcolo della temperatura dei gas di scarico è alterato.",
+            "Il calcolo dell'intervallo di manutenzione è alterato.",
+            "Il sistema diagnostico è disturbato."
+          ]}
+        ],
+        "en": [
+          {"t": "p", "x": "We do not fit tuning boxes, which normally just interfere with the engine management signals to trick the injectors into adding more fuel. Our service is a custom remap of your ECU, specific to your vehicle."},
+          {"t": "p", "x": "Tuning boxes work differently from a remap. They are based on the principle that more diesel fuel = more diesel power. The theory is correct and tuning boxes do increase power, but they cannot control the amount of black smoke (the maximum visible smoke limit) coming out of the exhaust."},
+          {"t": "p", "x": "Too much smoke is undesirable, both environmentally and visually. More importantly, black smoke is unburnt diesel fuel that clings to the combustion chamber, with deposits coming straight out of the exhaust pipe: it is therefore wasted fuel that has contributed nothing to the increase in power. The results are higher emissions, a higher thermal load on the engine (i.e. exhaust gas temperature) and, often, faults such as \"jerking\". It should be clear what this means for your engine."},
+          {"t": "p", "x": "A modern engine has complex control systems that work together to keep everything running perfectly. A diesel tuning box manipulates certain signals to increase the injection time or the fuel pressure. Unfortunately, this manipulation is done entirely without the engine control system knowing about it. This means that a diesel tuning box fools the vehicle's engine control system, and as a consequence a large number of values and control data will be incorrect, with consequences such as:"},
+          {"t": "ul", "items": [
+            "The on-board computer shows improved fuel consumption, but the actual amount left in the tank is lower, because fuel is being injected without any of the sensors detecting the extra quantity entering the cylinder.",
+            "The electronic stability programme (ESP) is disrupted because of the incorrect torque value.",
+            "Boxes and loose wiring in the engine bay.",
+            "Automatic gearboxes receive an incorrect torque value.",
+            "Torque reduction when changing gear (for comfort and durability) is not retained.",
+            "Regeneration (emptying) of the particulate filter will not be optimal.",
+            "The exhaust gas temperature calculation is thrown off.",
+            "The service interval calculation is thrown off.",
+            "The diagnostic system is disrupted."
+          ]}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Cos'è la coppia (torque)?", "en": "What is torque?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "La coppia è la forza di rotazione generata in un motore dalle parti in movimento rotatorio; la potenza è la misura di quanto velocemente quella coppia viene erogata. Potenza e coppia lavorano insieme, dato che la potenza si calcola a partire dalla coppia."},
+          {"t": "p", "x": "Per l'acquirente medio la coppia non dovrebbe essere un fattore determinante, a meno che non si sappia di dover trainare o trasportare carichi pesanti. È qui che i veicoli con molta coppia danno il meglio: quando si traina un rimorchio o si viaggia a pieno carico. Con un veicolo ricco di coppia sarà più facile accelerare e mantenere la velocità in qualsiasi situazione, ma soprattutto con carichi pesanti."},
+          {"t": "p", "x": "Anche le auto ad alte prestazioni possono erogare una grande quantità di coppia, che aiuta molto in accelerazione. Quella sensazione di sentirsi schiacciare gli occhi verso la nuca su un'auto veloce, quando si affonda con decisione il piede destro, è un esempio di coppia in abbondanza."}
+        ],
+        "en": [
+          {"t": "p", "x": "Torque is the rotational force created in an engine by its rotating parts; power is the measure of how quickly that torque is delivered. Power and torque work together, since power is calculated from torque."},
+          {"t": "p", "x": "For the average buyer, torque should not be a deciding factor unless you know you will be towing or carrying heavy loads. This is where high-torque vehicles perform well: when towing a trailer or running at maximum load capacity. A high-torque vehicle will find it easier to accelerate and hold its speed in any situation, but especially with heavy loads."},
+          {"t": "p", "x": "High-performance cars can also produce a great deal of torque, which helps enormously with acceleration. That feeling of your eyes being sucked into the back of your head in a fast car when you plant your right foot is an example of torque in abundance."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Cos'è la BHP (potenza al freno)?", "en": "What is BHP (brake horsepower)?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "La potenza al freno (BHP, brake horsepower) è la misura della potenza di un motore prima delle perdite causate da cambio, alternatore, differenziale, pompa dell'acqua e altri componenti ausiliari come la pompa del servosterzo, l'impianto di scarico silenziato, ecc. Il termine \"freno\" si riferisce a un dispositivo che veniva utilizzato per applicare un carico al motore e mantenerlo al regime di rotazione desiderato. Durante le prove si misuravano la coppia in uscita e il regime di rotazione per determinare la potenza al freno. In origine la potenza veniva misurata e calcolata con l'\"indicatore\" (un'invenzione di James Watt della fine del XVIII secolo) e, in seguito, mediante un freno De Prony collegato all'albero di uscita del motore."},
+          {"t": "p", "x": "Più di recente, al posto del freno De Prony si utilizza un banco prova motori. Anche se la potenza trasmessa alle ruote motrici è inferiore a quella disponibile all'albero motore, un banco prova a rulli fornisce un'indicazione della potenza \"reale\" del motore, al netto delle perdite nella trasmissione e nel cambio. Si ottiene così un'indicazione ragionevolmente precisa di come si comporterà su strada il motore di un veicolo."}
+        ],
+        "en": [
+          {"t": "p", "x": "Brake horsepower (BHP) is the measure of an engine's power before the losses caused by the gearbox, alternator, differential, water pump and other auxiliary components such as the power steering pump, the muffled exhaust system, etc. The term \"brake\" refers to a device that was used to load an engine and hold it at a desired rotational speed. During testing, the output torque and rotational speed were measured to determine the brake horsepower. Power was originally measured and calculated using the \"indicator\" (an invention of James Watt from the late 18th century), and later by means of a De Prony brake connected to the engine's output shaft."},
+          {"t": "p", "x": "More recently, an engine dynamometer is used instead of a De Prony brake. Although the power delivered to the driving wheels is less than that available at the crankshaft, a chassis dynamometer (rolling road) gives an indication of the engine's \"real\" power after the losses in the drivetrain and gearbox. This provides a reasonably accurate indication of how a vehicle's engine will behave once on the road."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Cos'è la BDM (modalità di debug in background)?", "en": "What is BDM (Background Debug Mode)?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "L'interfaccia BDM (Background Debug Mode, modalità di debug in background) è un'interfaccia elettronica che consente il debug dei sistemi embedded. Nell'ambito del tuning, questo significa che per programmare una centralina in modalità BDM occorre rimuoverla dal veicolo e programmarla al banco."},
+          {"t": "p", "x": "L'interfaccia consente a un host di gestire e interrogare un dispositivo target. Sul dispositivo target è richiesto un hardware specializzato, mentre sull'host non serve alcun hardware particolare: è sufficiente un semplice pin di I/O bidirezionale."}
+        ],
+        "en": [
+          {"t": "p", "x": "The Background Debug Mode (BDM) interface is an electronic interface that allows embedded systems to be debugged. In the tuning world, this means that to program an ECU in BDM mode, the ECU has to be removed from the vehicle and programmed on a workbench."},
+          {"t": "p", "x": "The interface allows a host to manage and query a target. Specialised hardware is required in the target device, whereas no special hardware is needed in the host: a simple bidirectional I/O pin is sufficient."}
+        ]
+      }
+    },
+    {
+      "q": {"it": "Cos'è il Nm (newton metro)?", "en": "What is Nm (newton metre)?"},
+      "a": {
+        "it": [
+          {"t": "p", "x": "Il newton metro è un'unità di misura della coppia (detta anche \"momento\") nel Sistema Internazionale. Il simbolo è Nm o N·m. Un newton metro, scritto a volte con il trattino (newton-metro), equivale alla coppia prodotta da una forza di un newton applicata perpendicolarmente a un braccio di leva lungo un metro."}
+        ],
+        "en": [
+          {"t": "p", "x": "A newton metre is a unit of torque (also called \"moment\") in the SI system. Its symbol is Nm or N·m. One newton metre, sometimes hyphenated as newton-metre, is equal to the torque resulting from a force of one newton applied perpendicularly to a moment arm one metre long."}
+        ]
+      }
+    }
+  ]
+}
