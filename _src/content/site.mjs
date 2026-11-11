@@ -7,7 +7,6 @@ export const BIZ = {
   address: 'Via G. M. Serrati, 60 BIS — 20098 San Giuliano Milanese (MI)',
   mapsLink: 'https://www.google.com/maps/search/?api=1&query=BMWorks+Performance+Via+Giacinto+Menotti+Serrati+60+San+Giuliano+Milanese',
   mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2801.7402129614593!2d9.290649412068614!3d45.3944110709522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786cfb6432cc17f%3A0x8f6bf79af24fa8bb!2sVia%20Giacinto%20Menotti%20Serrati%2C%2060%2C%2020098%20San%20Giuliano%20Milanese%20MI!5e0!3m2!1sen!2sit!4v1715772839282!5m2!1sen!2sit',
-  lookup: 'https://www.quantumtuning.co.uk/dealer-tool/responsive-vehicle-look-up-tool/international-dealers/bmworks-performance-italy-vehicle-lookup.aspx',
   ig: 'https://www.instagram.com/bmworks.it/', fb: 'https://www.facebook.com/BMWorks.it',
   tt: 'https://www.tiktok.com/@bmworks.performan',
   founder: 'Gicu Plamadeala',
@@ -64,6 +63,7 @@ export const UI = {
     vehiclePh: L('Es. BMW 320d F30, 2015', 'E.g. BMW 320d F30, 2015'), message: L('Il tuo messaggio', 'Your message'),
     accept: L('Accetto la', 'I accept the'),
     err: L('Inserisci nome e messaggio e accetta l’informativa privacy.', 'Please enter your name and message and accept the privacy notice.'),
+    errQuote: L('Inserisci almeno marca, modello e nome, e accetta l’informativa privacy.', 'Please enter at least the make, model and your name, and accept the privacy notice.'),
     viaWa: L('Invia su WhatsApp', 'Send via WhatsApp'), viaMail: L('Invia via email', 'Send by email'),
     note: L('Il messaggio si apre già compilato in WhatsApp o nella tua app di posta: basta premere invio.', 'Your message opens pre-filled in WhatsApp or your email app: just press send.'),
   },
@@ -705,11 +705,24 @@ export const REMAP = {
   kicker: L('Servizio rimappatura', 'Remapping service'),
   h1: L('Rimappatura centraline di alta qualità', 'High-quality ECU remapping'),
   lead: L('Più potenza, più coppia, consumi ridotti: una mappa ottimizzata su misura per il tuo veicolo, entro limiti sicuri.', 'More power, more torque, lower consumption: a map optimised for your vehicle, within safe limits.'),
-  lookKicker: L('Cerca il tuo veicolo', 'Look up your vehicle'),
-  lookTitle: L('Scopri quanto può guadagnare il tuo veicolo', 'See how much your vehicle can gain'),
-  lookText: L('Seleziona marca, modello e motore per vedere potenza e coppia prima e dopo la rimappatura.', 'Select make, model and engine to see power and torque before and after remapping.'),
-  lookNote: L('Lo strumento è fornito dal nostro partner Quantum Tuning. Non si carica?', 'This tool is provided by our partner Quantum Tuning. Not loading?'),
-  lookOpen: L('Aprilo in una nuova scheda', 'Open it in a new tab'),
+  lookKicker: L('Preventivo rimappatura', 'Remap quote'),
+  lookTitle: L('Quanto può guadagnare il tuo veicolo?', 'How much can your vehicle gain?'),
+  lookText: L('Indicaci il veicolo: ti rispondiamo con i guadagni di potenza e coppia previsti e il prezzo, di solito in giornata.', 'Tell us about your vehicle: we will reply with the expected power and torque gains and the price, usually the same day.'),
+  q: {
+    make: L('Marca', 'Make'), makePh: L('Es. BMW', 'E.g. BMW'),
+    model: L('Modello', 'Model'), modelPh: L('Es. 320d F30', 'E.g. 320d F30'),
+    engine: L('Motore / potenza', 'Engine / power'), enginePh: L('Es. 2.0 diesel 190 CV', 'E.g. 2.0 diesel 190 hp'),
+    year: L('Anno', 'Year'), fuel: L('Alimentazione', 'Fuel'),
+    fuels: L(['Diesel', 'Benzina', 'Ibrida'], ['Diesel', 'Petrol', 'Hybrid']),
+    type: L('Tipo di veicolo', 'Vehicle type'),
+    types: L(['Auto', 'Moto', 'Camper', 'Veicolo commerciale'], ['Car', 'Motorbike', 'Motorhome', 'Commercial vehicle']),
+    level: L('Livello', 'Level'),
+    levels: L(['Non so, consigliatemi', 'Performance Green (economia)', 'Performance Blue (potenza + economia)', 'Performance Red (massima potenza)'], ['Not sure, advise me', 'Performance Green (economy)', 'Performance Blue (power + economy)', 'Performance Red (maximum power)']),
+    notes: L('Note (facoltative)', 'Notes (optional)'),
+    subject: L('Preventivo rimappatura', 'Remap quote'),
+  },
+  steps: L([['Ci scrivi', 'Mandaci i dati del veicolo con il modulo o su WhatsApp.'], ['Ti rispondiamo', 'Guadagni previsti, livello consigliato e prezzo, senza impegno.'], ['Rimappatura', 'Circa 2 ore in officina, con prova al banco prima e dopo.']],
+    [['You message us', 'Send your vehicle details with the form or on WhatsApp.'], ['We reply', 'Expected gains, the recommended level and the price, with no obligation.'], ['Remap', 'Around 2 hours in the workshop, dyno-tested before and after.']]),
   body: L(
     `## Come funziona
 
@@ -821,7 +834,7 @@ La procedura richiede **circa 2 ore** ed è **totalmente reversibile**, senza mo
 Thanks to the experience of BMWorks Performance, our remaps are safe and reliable and respect the original parameters. Benefits include power increases of 15% to 25% and fuel savings of up to 8%, depending on the engine and the remap level chosen. Every car is dyno-tested before and after the work to verify the results.
 
 The procedure takes **around 2 hours** and is **fully reversible**, with no physical changes to the ECU. For information or to [book an appointment](@contact), get in touch or visit us in Milan.`),
-  cta: L('Cerca il tuo veicolo', 'Look up your vehicle'),
+  cta: L('Richiedi un preventivo', 'Request a quote'),
 };
 
 export const ABOUT = {

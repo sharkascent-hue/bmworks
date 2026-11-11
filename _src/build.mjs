@@ -10,7 +10,7 @@ const OUT = path.resolve(SRC, '..');
 // While the site is a preview it must not be indexed. Set to false (and check SITE_URL) at go-live.
 const PREVIEW = true;
 const SITE_URL = 'https://www.bmworks.it/';
-const V = '4';
+const V = '5';
 
 const faq = JSON.parse(fs.readFileSync(path.join(SRC, 'content/faq.json'), 'utf8')).items;
 const imgmap = JSON.parse(fs.readFileSync(path.join(SRC, 'content/imgmap.json'), 'utf8'));
@@ -259,15 +259,28 @@ const gallery = (files, alt) => `<div class="gallery" data-gallery>${files.map((
 const mapEmbed = () => `<div class="map"><iframe title="${t(UI.mapTitle)}" src="${BIZ.mapEmbed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>`;
 const contactForm = (subject = '') => `
 <form class="form" data-contact-form data-subject="${esc(subject)}" novalidate>
-  <div class="row"><label>${t(UI.form.name)}<input name="name" autocomplete="name" required></label><label>${t(UI.form.phone)}<input name="phone" type="tel" autocomplete="tel"></label></div>
-  <label>Email<input name="email" type="email" autocomplete="email"></label>
-  <label>${t(UI.form.vehicle)}<input name="vehicle" placeholder="${t(UI.form.vehiclePh)}"></label>
+  <div class="row"><label>${t(UI.form.name)}<input name="name" data-l="${t(UI.form.name)}" autocomplete="name" required></label><label>${t(UI.form.phone)}<input name="phone" data-l="${t(UI.form.phone)}" type="tel" autocomplete="tel"></label></div>
+  <label>Email<input name="email" data-l="Email" type="email" autocomplete="email"></label>
+  <label>${t(UI.form.vehicle)}<input name="vehicle" data-l="${t(UI.form.vehicle)}" placeholder="${t(UI.form.vehiclePh)}"></label>
   <label>${t(UI.form.message)}<textarea name="message" rows="5" required></textarea></label>
   <label class="check"><input type="checkbox" name="privacy" required><span>${t(UI.form.accept)} <a href="${href('privacy')}">${t(UI.privacy)}</a></span></label>
   <p class="form-err" hidden>${t(UI.form.err)}</p>
   <div class="form-btns"><button class="btn btn-wa" type="submit" data-via="wa">${I.wa}${t(UI.form.viaWa)}</button><button class="btn btn-ghost" type="submit" data-via="mail">${I.mail}${t(UI.form.viaMail)}</button></div>
   <p class="form-note">${t(UI.form.note)}</p>
 </form>`;
+const remapForm = () => { const q = REMAP.q, opt = a => a.map(o => `<option>${esc(o)}</option>`).join(''); return `
+<form class="form" data-contact-form data-subject="${esc(t(q.subject))}" novalidate>
+  <div class="row"><label>${t(q.type)}<select name="type" data-l="${t(q.type)}">${opt(t(q.types))}</select></label><label>${t(q.make)}<input name="make" data-l="${t(q.make)}" placeholder="${t(q.makePh)}" required></label></div>
+  <div class="row"><label>${t(q.model)}<input name="model" data-l="${t(q.model)}" placeholder="${t(q.modelPh)}" required></label><label>${t(q.year)}<input name="year" data-l="${t(q.year)}" inputmode="numeric" maxlength="4" placeholder="2018"></label></div>
+  <div class="row"><label>${t(q.engine)}<input name="engine" data-l="${t(q.engine)}" placeholder="${t(q.enginePh)}"></label><label>${t(q.fuel)}<select name="fuel" data-l="${t(q.fuel)}">${opt(t(q.fuels))}</select></label></div>
+  <label>${t(q.level)}<select name="level" data-l="${t(q.level)}">${opt(t(q.levels))}</select></label>
+  <div class="row"><label>${t(UI.form.name)}<input name="name" data-l="${t(UI.form.name)}" autocomplete="name" required></label><label>${t(UI.form.phone)}<input name="phone" data-l="${t(UI.form.phone)}" type="tel" autocomplete="tel"></label></div>
+  <label>${t(q.notes)}<textarea name="message" rows="3"></textarea></label>
+  <label class="check"><input type="checkbox" name="privacy" required><span>${t(UI.form.accept)} <a href="${href('privacy')}">${t(UI.privacy)}</a></span></label>
+  <p class="form-err" hidden>${t(UI.form.errQuote)}</p>
+  <div class="form-btns"><button class="btn btn-wa" type="submit" data-via="wa">${I.wa}${t(UI.form.viaWa)}</button><button class="btn btn-ghost" type="submit" data-via="mail">${I.mail}${t(UI.form.viaMail)}</button></div>
+  <p class="form-note">${t(UI.form.note)}</p>
+</form>`; };
 const localBiz = () => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'AutoRepair', name: 'BMWorks Performance', url: SITE_URL, image: SITE_URL + 'assets/img/logo.webp', telephone: BIZ.tel, email: BIZ.email, address: { '@type': 'PostalAddress', streetAddress: 'Via Giacinto Menotti Serrati, 60 BIS', postalCode: '20098', addressLocality: 'San Giuliano Milanese', addressRegion: 'MI', addressCountry: 'IT' }, geo: { '@type': 'GeoCoordinates', latitude: 45.394594, longitude: 9.293357 }, openingHours: 'Mo-Fr 09:00-18:00', sameAs: [BIZ.ig, BIZ.fb, BIZ.tt] })}</script>`;
 
 /* ---------- pages ---------- */
@@ -343,9 +356,10 @@ function remap() {
   const P = REMAP;
   return page({ key: 'remap', title: t(P.title), desc: t(P.desc), ogImg: 'blog-a97a96fd.webp', body: `
 ${pageHero({ kicker: t(P.kicker), h1: t(P.h1), lead: t(P.lead), image: 'blog-affc3b0d.webp', trail: [[null, t(UI.nav.remapLookup)]] })}
-<section class="sec"><div class="wrap">${secHead(t(P.lookKicker), t(P.lookTitle), t(P.lookText))}
-  <div class="lookup"><iframe title="${t(P.lookTitle)}" src="${BIZ.lookup}" loading="lazy"></iframe></div>
-  <p class="note">${t(P.lookNote)} <a href="${BIZ.lookup}" target="_blank" rel="noopener">${t(P.lookOpen)}</a></p>
+<section class="sec"><div class="wrap split">
+  <div>${secHead(t(P.lookKicker), t(P.lookTitle), t(P.lookText))}
+    <ol class="steps">${t(P.steps).map(([h, x], i) => `<li><span class="num">${i + 1}</span><div><h3>${h}</h3><p>${x}</p></div></li>`).join('')}</ol></div>
+  <div class="panel" id="preventivo">${remapForm()}</div>
 </div></section>
 <section class="sec sec-alt"><div class="wrap">${secHead(t(HOME.remapKicker), t(HOME.remapTitle), t(HOME.remapText))}
   <div class="tiles">${HOME.remapTypes.map(r => `<div class="tile"><span class="tile-ic">${VEH[r.icon]}</span><h3>${t(r.title)}</h3><p>${t(r.text)}</p></div>`).join('')}</div></div></section>

@@ -92,22 +92,17 @@
     $$('button[type=submit]', form).forEach(function (b) { b.addEventListener('click', function () { via = b.dataset.via; }); });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var f = form.elements, err = $('.form-err', form);
-      if (!f.name.value.trim() || !f.message.value.trim() || !f.privacy.checked) { err.hidden = false; return; }
+      var err = $('.form-err', form), ok = true;
+      $$('[required]', form).forEach(function (el) { var bad = el.type === 'checkbox' ? !el.checked : !el.value.trim(); if (bad) { el.setAttribute('aria-invalid', 'true'); ok = false; } else el.removeAttribute('aria-invalid'); });
+      if (!ok) { err.hidden = false; return; }
       err.hidden = true;
-      var L = lang === 'it'
-        ? { n: 'Nome', p: 'Telefono', v: 'Veicolo', s: 'Richiesta dal sito', a: 'Riguardo a' }
-        : { n: 'Name', p: 'Phone', v: 'Vehicle', s: 'Website enquiry', a: 'About' };
-      var lines = [];
-      if (form.dataset.subject) lines.push(L.a + ': ' + form.dataset.subject);
-      lines.push(L.n + ': ' + f.name.value.trim());
-      if (f.phone.value.trim()) lines.push(L.p + ': ' + f.phone.value.trim());
-      if (f.email.value.trim()) lines.push('Email: ' + f.email.value.trim());
-      if (f.vehicle.value.trim()) lines.push(L.v + ': ' + f.vehicle.value.trim());
-      lines.push('', f.message.value.trim());
+      var subj = form.dataset.subject, lines = [];
+      if (subj) lines.push((lang === 'it' ? 'Riguardo a' : 'About') + ': ' + subj);
+      $$('[data-l]', form).forEach(function (el) { var v = el.value.trim(); if (v) lines.push(el.dataset.l + ': ' + v); });
+      var msg = form.elements.message.value.trim(); if (msg) lines.push('', msg);
       var text = lines.join('\n');
       if (via === 'mail') {
-        location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(L.s + (form.dataset.subject ? ' — ' + form.dataset.subject : '')) + '&body=' + encodeURIComponent(text);
+        location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent((lang === 'it' ? 'Richiesta dal sito' : 'Website enquiry') + (subj ? ' — ' + subj : '')) + '&body=' + encodeURIComponent(text);
       } else {
         window.open('https://wa.me/' + TEL + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
       }
